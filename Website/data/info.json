@@ -1,0 +1,50 @@
+{
+  "name" : "NPASS Engineers",
+  "full_name": "NUMERICAL PROTECTION AND AUTOMATION APPLICATION SUPPORT ENGINEERS",
+  "about_us": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "important_points": [
+    {
+      "text": "text1"
+    },
+    {
+      "text": "text2"
+    }
+  ],
+  "Services": {
+    "description" : "services Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "service": [
+      {
+        "name": "Service 1",
+        "description": "Service 1 description"
+      },
+      {
+        "name": "Service 2",
+        "description": "Service 2 description"
+      },
+      {
+        "name": "Service 2",
+        "description": "Service 2 description"
+      }
+    ]
+  },
+  "clients": 200,
+  "products": 501,
+  "members": 12,
+  "inquires": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "products_description": "prod Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "team": {
+    "description": "Team Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.",
+    "members": [
+      {
+        "name": "Pravin Talekar",
+        "designation": "Director",
+        "phone": 987654321,
+        "email": "example@example.com",
+        "linkedin": "linkedin.com"
+      }
+    ]
+  },
+  "address": "A108 Adam Street, New York, NY 444001",
+  "phone": "+1 5589 55488 66",
+  "email": "contact@example.com"
+}
