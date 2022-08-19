@@ -76,7 +76,7 @@ $info = mysqli_fetch_assoc($result_info);
       <div class="logo mr-auto">
         <h1 class="text-light"><a href="index.php"><span id="header_name"><?= $info['name'] ?></span></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+        <!-- <a href="index.php"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav class="nav-menu d-none d-lg-block">
@@ -134,37 +134,38 @@ $info = mysqli_fetch_assoc($result_info);
       <div class="container">
 
         <div class="row no-gutters">
-          <div class="content col-xl-8 d-flex align-items-stretch" data-aos="fade-up">
+          <div class="content col-xl-12 d-flex align-items-stretch" data-aos="fade-up">
             <div class="content">
               <h3>About Us</h3>
               <p>
                 <?= $info['about'] ?>
               </p>
+              <h3>Dealerships</h3>
+              <?php 
+              $dealer_query = "SELECT * FROM dealerships";
+              $result_dealer = mysqli_query($db, $dealer_query);
+              while($row = mysqli_fetch_assoc($result_dealer)){
+                ?>
+              <div class="row">
+                <div class="col-12 col-lg-4 d-flex justify-content-center">
+                  <img class="mb-5" src="<?= $row['dealer_image'] ?>" style="width:75%">
+                </div>
+                <div class="col-12 col-lg-8">
+                  <h4 class="text-uppercase font-weight-bold"><?= $row['dealer_name'] ?></h4>
+                  <p>
+                    <?= $row['dealer_desc'] ?>
+                  </p>
+                  <div class="row d-flex justify-content-center">
+                    <a class="cert-btn" href="<?= $row['dealer_cert'] ?>">Certificate</a>
+                  </div>
+                </div>
+                
+              </div>
+              <?php 
+              }
+                ?>
               <!-- <a href="#" class="about-btn">About us <i class="bx bx-chevron-right"></i></a> -->
             </div>
-          </div>
-          <div class="col-xl-4 d-flex align-items-stretch">
-            <div class="icon-boxes d-flex flex-column justify-content-center">
-              <div class="row">
-                <div class="col-md-12 icon-box" data-aos="fade-up" data-aos-delay="100">
-                  <i class="bx bx-cube-alt"></i>
-                  <?php 
-                  $imp1 = explode('|',$info['imp_point1']);
-                   ?>
-                  <h4><?= $imp1[0] ?></h4>
-                  <p><?= $imp1[1] ?></p>
-                </div>
-
-                <div class="col-md-12 icon-box" data-aos="fade-up" data-aos-delay="200">
-                  <i class="bx bx-cube-alt"></i>
-                  <?php 
-                  $imp2 = explode('|',$info['imp_point2']);
-                   ?>
-                  <h4><?= $imp2[0] ?></h4>
-                  <p><?= $imp2[1] ?></p>
-                </div>
-              </div>
-            </div><!-- End .content-->
           </div>
         </div>
 
@@ -427,10 +428,10 @@ $info = mysqli_fetch_assoc($result_info);
 
           <div class="col-lg-4 col-md-6">
             <div class="footer-info" data-aos="fade-up" data-aos-delay="50">
-              <h3>NPAAS Engineers</h3>
-              <p class="pb-3"><em>Qui repudiandae et eum dolores alias sed ea. Qui suscipit veniam excepturi quod.</em></p>
+              <h3><?= $info['name'] ?></h3>
+              <p class="pb-3"><em><?= $info['full_name'] ?></em></p>
               <p>
-                <?= $info['address'] ?>
+                <?= $info['address'] ?><br>
                 <strong>Phone:</strong> <?= $info['phone'] ?><br>
                 <strong>Email:</strong> <?= $info['email'] ?><br>
               </p>

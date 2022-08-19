@@ -1,11 +1,25 @@
-<!DOCTYPE html>
+<?php
+
+require($_SERVER['DOCUMENT_ROOT']."/NPAASEngineers/dbconnect.php");
+
+$name = $_GET["name"];
+$prod_query = "SELECT * FROM products WHERE product_name='".$name."'";
+$result_prod = mysqli_query($db, $prod_query);
+$prod = mysqli_fetch_assoc($result_prod);
+
+$info_query = "SELECT * FROM info";
+$result_info = mysqli_query($db, $info_query);
+$info = mysqli_fetch_assoc($result_info);
+
+ ?>
+ 
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>NPAAS Engineers</title>
+  <title><?= $info['name'] ?></title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -46,37 +60,17 @@
     <div class="container d-flex">
 
       <div class="logo mr-auto">
-        <h1 class="text-light"><a href="index.html"><span>NPAAS Engineers</span></a></h1>
+        <h1 class="text-light"><a href="index.php"><span><?= $info['name'] ?></span></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+        <!-- <a href="index.php"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="#header">Home</a></li>
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#services">Services</a></li>
-          <li class="drop-down"><a href="#portfolio">Products</a>
-            <ul>
-              <li><a href="#portfolio">Products</a></li>
-              <li class="drop-down"><a href="#">Drop Down 2</a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-              <li><a href="#">Drop Down 5</a></li>
-            </ul>
-          </li>
-          <!-- <li></li> -->
-          <li><a href="#team">Team</a></li>
-
-          <li><a href="#contact">Contact Us</a></li>
+          <li class="active"><a href="">Main</a></li>        
+          <li><a href="#products">Products</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
 
         </ul>
       </nav><!-- .nav-menu -->
@@ -87,9 +81,9 @@
   <!-- ======= Hero Section ======= -->
   <section id="hero">
     <div class="hero-container" data-aos="fade-up">
-      <img class="mb-5" src="assets/img/products/default.jpg" style="height:40vh">
-      <h1>Product Type X</h1>
-      <h2>Desc X</h2>
+      <img class="mb-5" src="<?= $prod['product_image'] ?>" style="height:40vh">
+      <h1><?= $prod['product_name'] ?></h1>
+      <!-- <h2></h2> -->
       <a href="#products" class="btn-get-started scrollto"><i class="bx bx-chevrons-down"></i></a>
     </div>
   </section><!-- End Hero -->
@@ -101,20 +95,31 @@
       <div class="container">
 
         <div class="section-title" data-aos="fade-in" data-aos-delay="100">
-          <h2>Services</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <h2>Products Available</h2>
         </div>
-
+        
         <div class="row d-flex justify-content-center">
-          <div class="col-md-6 col-lg-3 d-flex align-items-center mb-3">
-            <div class="icon-box d-flex justify-content-start align-items-center" data-aos="fade-up" style="width:100%;padding-bottom:10px">
-              <div class="icon pr-3"><i class='bx bxs-box'></i></div>
-              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-              <p class="description"></p>
+        <?php 
+          $prod_array = explode("|",$prod['product_list']);
+          for ($i = 0; $i < count($prod_array); $i++) {
+            ?>
+            
+            <div class="col-md-6 col-lg-3 d-flex align-items-center mb-3">
+              <div class="icon-box d-flex justify-content-start align-items-center" data-aos="fade-up" style="width:100%;padding-bottom:10px">
+                <div class="icon pr-3"><i class='bx bxs-box'></i></div>
+                <h4 class="title"><a href=""><?= $prod_array[$i] ?></a></h4>
+                <p class="description"></p>
+              </div>
             </div>
-          </div>
+            
+          <?php
+          }
+         ?>
 
-          <div class="col-md-6 col-lg-3 d-flex align-items-center mb-3">
+        
+          
+
+          <!-- <div class="col-md-6 col-lg-3 d-flex align-items-center mb-3">
             <div class="icon-box d-flex justify-content-start align-items-center" data-aos="fade-up" style="width:100%;padding-bottom:10px">
               <div class="icon pr-3"><i class='bx bxs-box'></i></div>
               <h4 class="title"><a href="">Lorem Ipsum</a></h4>
@@ -127,7 +132,7 @@
               <h4 class="title"><a href="">Lorem Ipsum</a></h4>
               <p class="description"></p>
             </div>
-          </div>
+          </div> -->
 
         </div>
 
@@ -142,9 +147,9 @@
         <div class="row no-gutters">
           <div class="content col-xl-12 d-flex align-items-stretch" data-aos="fade-up">
             <div class="content">
-              <h3>About the product</h3>
+              <h3>About <?= $prod['product_name'] ?></h3>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
+                <?= $prod['product_description'] ?>
               </p>
             </div>
           </div>
@@ -162,7 +167,7 @@
 
         <div class="section-title" data-aos="fade-in" data-aos-delay="100">
           <h2>Contact</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p> for Queries about <?= $prod['product_name'] ?></p>
         </div>
 
           <div class="col-lg-12">
@@ -209,13 +214,12 @@
 
           <div class="col-lg-4 col-md-6">
             <div class="footer-info" data-aos="fade-up" data-aos-delay="50">
-              <h3>NPAAS Engineers</h3>
-              <p class="pb-3"><em>Qui repudiandae et eum dolores alias sed ea. Qui suscipit veniam excepturi quod.</em></p>
+              <h3><?= $info['name'] ?></h3>
+              <p class="pb-3"><em><?= $info['full_name'] ?></em></p>
               <p>
-                A108 Adam Street <br>
-                NY 535022, USA<br><br>
-                <strong>Phone:</strong> +1 5589 55488 55<br>
-                <strong>Email:</strong> info@example.com<br>
+                <?= $info['address'] ?><br>
+                <strong>Phone:</strong> <?= $info['phone'] ?><br>
+                <strong>Email:</strong> <?= $info['email'] ?><br>
               </p>
             </div>
           </div>
@@ -223,13 +227,26 @@
           <div class="col-lg-2 col-md-6 footer-links" data-aos="fade-up" data-aos-delay="250">
             <h4>Our Services</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+              <?php 
+              $services_query = "SELECT * FROM services";
+              $result_services = mysqli_query($db, $services_query);
+              while($row = mysqli_fetch_assoc($result_services)){
+                // echo $row['service_name'];
+                ?>
+              <li><i class="bx bx-chevron-right"></i><?= $row['service_name']?></li>
+              <?php 
+            }
+                ?>
             </ul>
           </div>
+
+          <!-- <div class="col-lg-4 col-md-6 footer-newsletter" data-aos="fade-up" data-aos-delay="350">
+            <h4>Our Newsletter</h4>
+            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit" value="Subscribe">
+            </form>
+          </div> -->
 
         </div>
       </div>
