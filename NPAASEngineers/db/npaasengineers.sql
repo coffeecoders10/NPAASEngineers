@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 19, 2022 at 01:26 PM
+-- Generation Time: Aug 20, 2022 at 01:45 AM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -21,6 +21,27 @@ SET time_zone = "+00:00";
 --
 -- Database: `npaasengineers`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dealerships`
+--
+
+CREATE TABLE `dealerships` (
+  `dealer_id` int(20) NOT NULL,
+  `dealer_name` varchar(200) NOT NULL,
+  `dealer_image` varchar(200) NOT NULL,
+  `dealer_desc` varchar(200) NOT NULL,
+  `dealer_cert` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `dealerships`
+--
+
+INSERT INTO `dealerships` (`dealer_id`, `dealer_name`, `dealer_image`, `dealer_desc`, `dealer_cert`) VALUES
+(1, 'Ashida', 'assets/img/products/default.jpg', 'Ashida Desc', 'assets/img/products/default.jpg');
 
 -- --------------------------------------------------------
 
@@ -75,8 +96,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `product_name`, `product_service`, `product_description`, `product_list`, `product_image`, `product_filter`) VALUES
-(1, 'Test1', 'Test1_service', 'Test1_desc', 'a', 'assets/img/products/default.jpg', 'a123|b1234'),
-(2, 'Test22', 'Test22_ser', 'Test22_sadghsadghsjagd', 'a', 'assets/img/products/default.jpg', 'aasd123|bds1234|nbn12');
+(1, 'Test1', 'Test1_service', 'Test1_desc', 'a123|b1234', 'assets/img/products/default.jpg', 'a'),
+(2, 'Test22', 'Test22_ser', 'Test22_sadghsadghsjagd', 'aasd123|bds1234|nbn12', 'assets/img/products/default.jpg', 'a');
 
 -- --------------------------------------------------------
 
