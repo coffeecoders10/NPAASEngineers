@@ -12,6 +12,10 @@ $products = mysqli_fetch_all($result_products);
 $team_query = "SELECT * FROM team";
 $result_team = mysqli_query($db, $team_query);
 $team = mysqli_fetch_all($result_team);
+
+$dealers_query = "SELECT * FROM dealerships";
+$result_dealers = mysqli_query($db, $dealers_query);
+$dealers = mysqli_fetch_all($result_dealers);
 // echo $products;
 
 
@@ -148,13 +152,15 @@ This script is identical to the above JavaScript function.
 */
 var ct = 1;
 var ct_1 = 1;
+var ct_2 = 1;
 function new_link()
 {
 	ct++;
 	var div1 = document.createElement('div');
 	div1.id = ct;
 	// link to delete extended form elements
-	var delLink = '<div style="text-align:right;margin-right:65px"><a href="javascript:delIt('+ ct +')">Del</a></div>';
+  var delLink = '<div class="col-md-12 text-right mt-3 mb-5"><a href="javascript:delIt('+ ct +')" class="del-button mb-5" >Delete</button></div>';
+	// var delLink = '<div style="text-align:right;margin-right:65px"><a href="javascript:delIt('+ ct +')">Del</a></div>';
 	div1.innerHTML = document.getElementById('newlinktpl').innerHTML + delLink;
 	document.getElementById('newlink').appendChild(div1);
 }
@@ -173,7 +179,8 @@ function new_link_1()
 	var div1 = document.createElement('div');
 	div1.id = ct_1;
 	// link to delete extended form elements
-	var delLink = '<div style="text-align:right;margin-right:65px"><a href="javascript:delIt_1('+ ct_1 +')">Del</a></div>';
+  var delLink = '<div class="col-md-12 text-right mt-3 mb-5"><a href="javascript:delIt_1('+ ct_1 +')" class="del-button mb-5" >Delete</button></div>';
+	// var delLink = '<div style="text-align:right;margin-right:65px"><a href="javascript:delIt_1('+ ct_1 +')">Del</a></div>';
 	div1.innerHTML = document.getElementById('newlinktpl_1').innerHTML + delLink;
 	document.getElementById('newlink_1').appendChild(div1);
 }
@@ -185,46 +192,27 @@ function delIt_1(eleId)
 	var parentEle = d.getElementById('newlink_1');
 	parentEle.removeChild(ele);
 }
-</script>
 
-<!-- <form method="post" action="">
-<div id="newlink">
-<div>
-<table border=0>
-	<tr>
-		<td> Link URL: </td>
-		<td> <input type="text" name="linkurl[]" value="http://www.satya-weblog.com"> </td>
-	</tr>
-	<tr>
-		<td> Link Description: </td>
-		<td>  <textarea name="linkdesc[]" cols="50" rows="5" ></textarea> </td>
-	</tr>
-</table>
-</div>
-</div>
-	<p>
-		<br>
-		<input type="submit" name="submit1">
-		<input type="reset" name="reset1">
-	</p>
-<p id="addnew">
-	<a href="javascript:new_link()">Add New </a>
-</p>
-</form>
-<div id="newlinktpl" style="display:none">
-<div>
-<table border=0>
-	<tr>
-		<td> Link URL: </td>
-		<td> <input type="text" name="linkurl[]" value=""> </td>
-	</tr>
-	<tr>
-		<td> Link Description: </td>
-		<td> <textarea name="linkdesc[]" cols="50" rows="5" ></textarea> </td>
-	</tr>
-</table>
-</div>
-</div> -->
+function new_link_2()
+{
+	ct_2++;
+	var div1 = document.createElement('div');
+	div1.id = ct_2;
+	// link to delete extended form elements
+  var delLink = '<div class="col-md-12 text-right mt-3 mb-5"><a href="javascript:delIt_2('+ ct_2 +')" class="del-button mb-5" >Delete</button></div>';
+	// var delLink = '<div style="text-align:right;margin-right:65px"><a href="javascript:delIt_2('+ ct_1 +')">Del</a></div>';
+	div1.innerHTML = document.getElementById('newlinktpl_2').innerHTML + delLink;
+	document.getElementById('newlink_2').appendChild(div1);
+}
+// function to delete the newly added set of elements
+function delIt_2(eleId)
+{
+	d = document;
+	var ele = d.getElementById(eleId);
+	var parentEle = d.getElementById('newlink_2');
+	parentEle.removeChild(ele);
+}
+</script>
 
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
@@ -238,11 +226,12 @@ function delIt_1(eleId)
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="index.html" target="_blank">Home Preview</a></li>
+          <li class="active"><a href="index.php" target="_blank">Home Preview</a></li>
           <li><a href="#description">Description</a></li>
-          <li><a href="#add-product">Add Product</a></li>
+          <li><a href="#add-product">Product</a></li>
           <!-- <li></li> -->
-          <li><a href="#add-team">Add Team</a></li>
+          <li><a href="#add-team">Team</a></li>
+          <li><a href="#add-dealer">Dealer</a></li>
 
         </ul>
       </nav><!-- .nav-menu -->
@@ -255,7 +244,6 @@ function delIt_1(eleId)
     <div class="hero-container" data-aos="fade-up">
       <img class="mb-5" src="assets/img/logo.png" style="height:40vh">
       <h1>ADMIN</h1>
-      <h2>Desc X</h2>
       <a href="#products" class="btn-get-started scrollto"><i class="bx bx-chevrons-down"></i></a>
     </div>
   </section><!-- End Hero -->
@@ -267,108 +255,99 @@ function delIt_1(eleId)
       <div class="container">
 
         <div class="section-title" data-aos="fade-in" data-aos-delay="100">
-          <h2>Descripption Data</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <h2>Description Data</h2>
+          <p>Fill in information and click Submit</p>
         </div>
 
-        <div class="row d-flex justify-content-center">
+        <!-- <div class="row d-flex justify-content-center"> -->
           <form name="info_details" action="admin.php" method="post">
-
-            <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
-              <h4 class="text-uppercase">Name</h4>
-            </div>
-            <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
-              <input type="text" name="name" value="<?= $info['name'] ?>" required>
-            </div>
-            <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
-              <h4 class="text-uppercase">Full Name</h4>
-            </div>
-            <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
-              <input type="text" name="full_name" value="<?= $info['full_name'] ?>" required>
-            </div>
-            <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
-              <h4 class="text-uppercase">About</h4>
-            </div>
-            <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
-              <textarea name="about" rows="8" cols="80" required><?= $info['about'] ?></textarea>
-            </div>
-            <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
-              <h4 class="text-uppercase">Important Point 1</h4>
-            </div>
-            <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
-              <textarea name="imp1" rows="8" cols="80" required><?= $info['imp_point1'] ?></textarea>
-            </div>
-            <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
-              <h4 class="text-uppercase">Important Point 2</h4>
-            </div>
-            <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
-              <textarea name="imp2" rows="8" cols="80" required><?= $info['imp_point2'] ?></textarea>
-            </div>
-            <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
-              <h4 class="text-uppercase">Service Description</h4>
-            </div>
-            <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
-              <textarea name="services_desc" rows="8" cols="80" required><?= $info['services_desc'] ?></textarea>
-            </div>
-            <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
-              <h4 class="text-uppercase">Inquires</h4>
-            </div>
-            <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
-              <textarea name="inquires" rows="8" cols="80" required><?= $info['inquires'] ?></textarea>
-            </div>
-            <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
-              <h4 class="text-uppercase">Client Count</h4>
-            </div>
-            <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
-              <input type="number" name="client_no" value="<?= $info['client_no'] ?>" required>
-            </div>
-            <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
-              <h4 class="text-uppercase">Product Count</h4>
-            </div>
-            <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
-              <input type="number" name="product_no" value="<?= $info['product_no'] ?>" required>
-            </div>
-            <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
-              <h4 class="text-uppercase">Member Count</h4>
-            </div>
-            <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
-              <input type="number" name="members_no" value="<?= $info['members_no'] ?>" required>
-            </div>
-            <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
-              <h4 class="text-uppercase">Product Description</h4>
-            </div>
-            <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
-              <textarea name="product_desc" rows="8" cols="80" required><?= $info['product_desc'] ?></textarea>
-            </div>
-            <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
-              <h4 class="text-uppercase">Team Description</h4>
-            </div>
-            <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
-              <textarea name="team_desc" rows="8" cols="80" required><?= $info['team_desc'] ?></textarea>
-            </div>
-            <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
-              <h4 class="text-uppercase">Address</h4>
-            </div>
-            <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
-              <textarea name="address" rows="8" cols="80" required><?= $info['address'] ?></textarea>
-            </div>
-            <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
-              <h4 class="text-uppercase">Phone</h4>
-            </div>
-            <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
-              <input type="text" name="phone" value="<?= $info['phone'] ?>" required>
-            </div>
-            <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
-              <h4 class="text-uppercase">Email</h4>
-            </div>
-            <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
-              <input type="email" name="email" value="<?= $info['email'] ?>" required>
-            </div>
-            <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
-              <button type="submit" name="info_button" value="info" class="admin-button">Submit</button>
-            </div>
+            <div class="row">
+              <div class="col-md-12 mb-1">
+                <h5 class="text-uppercase">Name</h5>
+              </div>
+              <div class="col-md-12 d-flex justify-content-center align-items-center mb-3">
+                <input type="text" name="name" class="form-control" value="<?= $info['name'] ?>" required>
+              </div>
+              <div class="col-md-12 mb-1">
+                <h5 class="text-uppercase">Full Name</h5>
+              </div>
+              <div class="col-md-12 d-flex justify-content-center align-items-center mb-3">
+                <input type="text" name="full_name" class="form-control" value="<?= $info['full_name'] ?>" required>
+              </div>
+              <div class="col-md-12 mb-1">
+                <h5 class="text-uppercase">About</h5>
+              </div>
+              <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
+                <textarea name="about" class="form-control" rows="4" cols="80" required><?= $info['about'] ?></textarea>
+              </div>
+              <div class="col-md-12 mb-1">
+                <h5 class="text-uppercase">Service Description</h5>
+              </div>
+              <div class="col-md-12 d-flex justify-content-center align-items-center mb-3">
+                <textarea name="services_desc" class="form-control" rows="4" cols="80" required><?= $info['services_desc'] ?></textarea>
+              </div>
+              <div class="col-md-12 mb-1">
+                <h5 class="text-uppercase">Inquires</h5>
+              </div>
+              <div class="col-md-12 justify-content-center d-flex align-items-center mb-5">
+                <textarea name="inquires" class="form-control" rows="4" cols="80" required><?= $info['inquires'] ?></textarea>
+              </div>
+              <hr>
+              <div class="col-md-3 mb-1">
+                <h5 class="text-uppercase">Client Count</h5>
+              </div>
+              <div class="col-md-9 d-flex justify-content-center align-items-center mb-3">
+                <input type="number" class="form-control" name="client_no" value="<?= $info['client_no'] ?>" required>
+              </div>
+              <div class="col-md-3 mb-1">
+                <h5 class="text-uppercase">Product Count</h5>
+              </div>
+              <div class="col-md-9 d-flex justify-content-center align-items-center mb-3">
+                <input type="number" class="form-control" name="product_no" value="<?= $info['product_no'] ?>" required>
+              </div>
+              <div class="col-md-3 mb-1">
+                <h5 class="text-uppercase">Member Count</h5>
+              </div>
+              <hr>
+              <div class="col-md-9 d-flex justify-content-center align-items-center mb-5">
+                <input type="number" class="form-control" name="members_no" value="<?= $info['members_no'] ?>" required>
+              </div>
+              <div class="col-md-12 mb-1">
+                <h5 class="text-uppercase">Product Description</h5>
+              </div>
+              <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
+                <textarea name="product_desc" class="form-control" rows="4" cols="80" required><?= $info['product_desc'] ?></textarea>
+              </div>
+              <div class="col-md-12 mb-1">
+                <h5 class="text-uppercase">Team Description</h5>
+              </div>
+              <div class="col-md-12 d-flex justify-content-center align-items-center mb-3">
+                <textarea name="team_desc" class="form-control" rows="4" cols="80" required><?= $info['team_desc'] ?></textarea>
+              </div>
+              <div class="col-md-12 mb-1">
+                <h5 class="text-uppercase">Address</h5>
+              </div>
+              <div class="col-md-12 justify-content-center d-flex align-items-center mb-5">
+                <textarea name="address" class="form-control" rows="4" cols="80" required><?= $info['address'] ?></textarea>
+              </div>
+              <div class="col-md-3 mb-3">
+                <h5 class="text-uppercase">Phone</h5>
+              </div>
+              <div class="col-md-9 d-flex justify-content-center align-items-center mb-3">
+                <input type="text" class="form-control" name="phone" value="<?= $info['phone'] ?>" required>
+              </div>
+              <div class="col-md-3 mb-3">
+                <h5 class="text-uppercase">Email</h5>
+              </div>
+              <div class="col-md-9 d-flex justify-content-center align-items-center mb-5">
+                <input type="email" class="form-control" name="email" value="<?= $info['email'] ?>" required>
+              </div>
+              <div class="col-md-12 justify-content-center d-flex align-items-center mb-3">
+                <button type="submit" name="info_button" value="info" class="admin-button">Submit</button>
+              </div>
+          </div>
           </form>
-        </div>
+        <!-- </div> -->
 
       </div>
     </section>
@@ -381,90 +360,134 @@ function delIt_1(eleId)
 
         <div class="section-title" data-aos="fade-in" data-aos-delay="100">
           <h2>Product</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p>Fill in information and click Submit. Add and Delete Products. Product List is seperated by '|'</p>
         </div>
 
           <div class="col-lg-12">
             <form action="admin.php" method="post" >
               <div id="newlink">
 
-                  <p id="addnew">
-                    <div class="col-md-6 form-group d-flex justify-content-center">
-                      <a href="javascript:new_link()" class="text-uppercase font-weight-bold" style="width:100%">Add New</a>
-                    </div>
-                  </p>
                   <?php
                   foreach ($products as $key) {
 
                   ?>
+                  
+                  <hr class="mb-3">
                   <div class="form-row">
-                  <div class="col-md-10 form-group" style="display:none">
-                    <input type="text" name="id[]" value="<?= $key["0"] ?>" class="form-control" id="id" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required/>
-                    <div class="validate"></div>
+                    <div class="col-md-12 ml-2">
+                      <p class="text-uppercase font-weight-bold">Name</p>
+                    </div>
+                    <div class="col-md-12 form-group" style="display:none">
+                      <input type="text" name="id[]" value="<?= $key["0"] ?>" class="form-control" id="id" required/>
+                    </div>
+                    <div class="col-md-10 form-group">
+                      <input type="text" name="name[]" value="<?= $key["1"] ?>" class="form-control" id="name" required/>
+                    </div>
+                    <div class="col-md-2 form-group">
+                      <a class="btn collapse-btn text-white"  onclick="$('#product-<?= $key["0"] ?>').slideToggle();">Show / Hide</a>
+                    </div>
+                    <div class="container-fluid" style="display:none" id="product-<?= $key["0"] ?>">
+                      <div class="col-md-12 ml-2">
+                        <p class="text-uppercase font-weight-bold">Service</p>
+                      </div>
+                      <div class="col-md-12 form-group">
+                        <input type="text" class="form-control" value="<?= $key["2"] ?>" name="service[]" id="email"  required/>
+                      </div>  
+                      <div class="col-md-12 ml-2">
+                        <p class="text-uppercase font-weight-bold">Description</p>
+                      </div>
+                      <div class="col-md-12 form-group">
+                        <input type="text" class="form-control" value="<?= $key["3"] ?>" name="description[]" id="subject" required/>
+                      </div>
+                      <div class="col-md-12 ml-2">
+                        <p class="text-uppercase font-weight-bold">Product List</p>
+                      </div>
+                      <div class="col-md-12 form-group">
+                        <textarea class="form-control" name="product_list[]" rows="5" data-rule="required" required><?= $key["4"] ?></textarea>
+                      </div>
+                      <div class="col-md-12 ml-2">
+                        <p class="text-uppercase font-weight-bold">Product Image</p>
+                      </div>
+                      <center>
+                      <div class="col-md-10 form-group border border-dark p-2">
+                        <input type="file" id="img" name="image[]" value="<?= $key["5"] ?>" accept="image/*">
+                      </div>
+                      </center>
+                      <div class="col-md-12 ml-2">
+                        <p class="text-uppercase font-weight-bold">Category</p>
+                      </div>
+                      <div class="col-md-12 form-group">
+                        <input type="text" class="form-control" value="<?= $key["6"] ?>" name="filter[]" id="filter" required/>
+                      </div>
+                      <div class="text-center">
+                        <button type="submit" class="del-button mb-5" name="product_delete" value="<?= $key[0] ?>">Delete</button>
+                      </div>
+                    </div>
                   </div>
-                  <div class="col-md-10 form-group">
-                    <input type="text" name="name[]" value="<?= $key["1"] ?>" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required/>
-                    <div class="validate"></div>
-                  </div>
-                  <div class="col-md-12 form-group">
-                    <input type="text" class="form-control" value="<?= $key["2"] ?>" name="service[]" id="email" placeholder="Your Service" required/>
-                    <div class="validate"></div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <input type="text" class="form-control" value="<?= $key["3"] ?>" name="description[]" id="subject" placeholder="Description" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" required/>
-                  <div class="validate"></div>
-                </div>
-                <div class="form-group">
-                  <textarea class="form-control" name="product_list[]" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Product List" required><?= $key["4"] ?></textarea>
-                  <div class="validate"></div>
-                </div>
-                <div class="form-group">
-                  <input type="file" id="img" name="image[]" value="<?= $key["5"] ?>" accept="image/*">
-                  <div class="validate"></div>
-                </div>
-                <div class="form-group">
-                  <input type="text" class="form-control" value="<?= $key["6"] ?>" name="filter[]" id="filter" placeholder="Filter" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" required/>
-                  <div class="validate"></div>
-                </div>
-                <div class="text-center"><button type="submit" name="product_delete" value="<?= $key[0] ?>">Delete</button></div>
-
-
+                  
               <?php
                 }
                ?>
                </div>
-               <div class="text-center"><button type="submit" name="product_submit" value="1">Submit</button></div>
+               <div class="text-center">
+                 <p id="addnew">
+                   <div class="col-md-12 d-flex justify-content-center">
+                     <a href="javascript:new_link()" class="add-button text-uppercase font-weight-bold" style="width:100%">Add New</a>
+                   </div>
+                 </p>
+                </div>
+               <div class="text-center">
+                 <button type="submit" class="admin-button text-uppercase" name="product_submit" value="1">Submit</button>
+               </div>
            </form>
             <div id="newlinktpl" style="display:none">
               <div class="form-row">
-              <div class="col-md-10 form-group">
-                <input type="text" name="names[]" class="form-control" id="names" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required />
-                <div class="validate"></div>
-              </div>
-              <div class="col-md-12 form-group">
-                <input type="text" class="form-control" name="services[]" id="emails" placeholder="Your Service" required />
-                <div class="validate"></div>
-              </div>
-            </div>
-            <div class="form-group">
-            <div class="form-group">
-              <input type="text" class="form-control" name="descriptions[]" id="subjects" placeholder="Description" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" required />
-              <div class="validate"></div>
-            </div>
-            <div class="form-group">
-              <textarea class="form-control" name="product_lists[]" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Product List" required></textarea>
-              <div class="validate"></div>
-            </div>
-            <div class="form-group">
-              <input type="file" id="imgs" name="images[]" accept="image/*">
-              <div class="validate"></div>
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" name="filters[]" id="filters" placeholder="Filter" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" required/>
-              <div class="validate"></div>
-            </div>
-            </div>
+                <hr>
+                <div class="col-md-12 ml-2 d-flex justify-content-center">
+                  <h4 class="text-uppercase font-weight-bold">New Product</h4>
+                </div>
+                <hr>
+                    <div class="col-md-12 ml-2">
+                      <p class="text-uppercase font-weight-bold">Name</p>
+                    </div>
+                    <div class="col-md-12 form-group">
+                      <input type="text" name="names[]" class="form-control" required/>
+                    </div>
+                    <div class="container-fluid">
+                      <div class="col-md-12 ml-2">
+                        <p class="text-uppercase font-weight-bold">Service</p>
+                      </div>
+                      <div class="col-md-12 form-group">
+                        <input type="text" class="form-control" name="services[]"  required/>
+                      </div>  
+                      <div class="col-md-12 ml-2">
+                        <p class="text-uppercase font-weight-bold">Description</p>
+                      </div>
+                      <div class="col-md-12 form-group">
+                        <input type="text" class="form-control" name="descriptions[]" required/>
+                      </div>
+                      <div class="col-md-12 ml-2">
+                        <p class="text-uppercase font-weight-bold">Product List</p>
+                      </div>
+                      <div class="col-md-12 form-group">
+                        <textarea class="form-control" name="product_lists[]" rows="5" data-rule="required" required></textarea>
+                      </div>
+                      <div class="col-md-12 ml-2">
+                        <p class="text-uppercase font-weight-bold">Product Image</p>
+                      </div>
+                      <center>
+                      <div class="col-md-10 form-group border border-dark p-2">
+                        <input type="file" id="img" name="images[]" accept="image/*">
+                      </div>
+                      </center>
+                      <div class="col-md-12 ml-2">
+                        <p class="text-uppercase font-weight-bold">Category</p>
+                      </div>
+                      <div class="col-md-12 form-group">
+                        <input type="text" class="form-control" name="filters[]" required/>
+                      </div>
+                    </div>
+                  </div>
           </div>
           </div>
 
@@ -479,7 +502,7 @@ function delIt_1(eleId)
 
         <div class="section-title" data-aos="fade-in" data-aos-delay="100">
           <h2>Team</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p>Manage Your Team</p>
         </div>
 
           <div class="col-lg-12">
@@ -496,65 +519,124 @@ function delIt_1(eleId)
 
                   ?>
                   <div class="form-row">
-                  <div class="col-md-10 form-group" style="display:none">
-                    <input type="text" name="id[]" value="<?= $key["0"] ?>" class="form-control" id="id" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required/>
-                    <div class="validate"></div>
-                  </div>
-                  <div class="col-md-10 form-group">
-                    <input type="text" name="name[]" value="<?= $key["1"] ?>" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required/>
-                    <div class="validate"></div>
-                  </div>
-                  <div class="col-md-12 form-group">
-                    <input type="text" class="form-control" value="<?= $key["2"] ?>" name="designation[]" id="email" placeholder="Your Designation" required/>
-                    <div class="validate"></div>
-                  </div>
+                    <div class="col-md-12 ml-2">
+                      <p class="text-uppercase font-weight-bold">Name</p>
+                    </div>
+                    <div class="col-md-10 form-group" style="display:none">
+                      <input type="text" name="id[]" value="<?= $key["0"] ?>" class="form-control" required/>
+                    </div>
+                    <div class="col-md-10 form-group">
+                      <input type="text" name="name[]" value="<?= $key["1"] ?>" class="form-control" required/>
+                    </div>
+                    <div class="col-md-2 form-group">
+                      <a class="btn collapse-btn text-white"  onclick="$('#team-<?= $key["0"] ?>').slideToggle();">Show / Hide</a>
+                    </div>
+                    <div class="container-fluid" style="display:none" id="team-<?= $key["0"] ?>">
+                    <div class="col-md-12 ml-2">
+                      <p class="text-uppercase font-weight-bold">Designation</p>
+                    </div>
+                    <div class="col-md-12 form-group">
+                      <input type="text" class="form-control" value="<?= $key["2"] ?>"  required/>
+                    </div>
+                    <div class="col-md-12 ml-2">
+                      <p class="text-uppercase font-weight-bold">Profile Image</p>
+                    </div>
+                    <center>
+                    <div class="col-md-10 form-group border border-dark p-2">
+                      <input type="file" id="img" name="image[]" accept="image/*">
+                    </div>
+                    </center>
+                    <div class="col-md-12 ml-2">
+                      <p class="text-uppercase font-weight-bold">Phone</p>
+                    </div>
+                    <div class="col-md-12 form-group">
+                      <input type="number" class="form-control" value="<?= $key["3"] ?>" name="phone[]" required/>
+                    </div>
+                    <div class="col-md-12 ml-2">
+                      <p class="text-uppercase font-weight-bold">Email</p>
+                    </div>
+                    <div class="col-md-12 form-group">
+                      <input type="email" class="form-control" value="<?= $key["4"] ?>" name="email[]" required/>
+                    </div>
+                    <div class="col-md-12 ml-2">
+                      <p class="text-uppercase font-weight-bold">Linkedin</p>
+                    </div>
+                    <div class="col-md-12 form-group">
+                      <input type="text" class="form-control" value="<?= $key["5"] ?>" name="linkedin[]" required/>
+                    </div>
+                    <div class="text-center col-md-12">
+                      <button type="submit" class="del-button mb-5" name="team_delete" value="<?= $key[0] ?>">Delete</button>
+                    </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                  <input type="number" class="form-control" value="<?= $key["3"] ?>" name="phone[]" id="subject" placeholder="Phone" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" required/>
-                  <div class="validate"></div>
-                </div>
-                <div class="form-group">
-                  <input type="email" class="form-control" value="<?= $key["4"] ?>" name="email[]" id="filter" placeholder="Email" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" required/>
-                  <div class="validate"></div>
-                </div>
-                <div class="form-group">
-                  <input type="text" class="form-control" value="<?= $key["5"] ?>" name="linkedin[]" id="filter" placeholder="Linkedin" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" required/>
-                  <div class="validate"></div>
-                </div>
-                <div class="text-center"><button type="submit" name="team_delete" value="<?= $key[0] ?>">Delete</button></div>
 
 
               <?php
                 }
                ?>
                </div>
-               <div class="text-center"><button type="submit" name="team_submit" value="1">Submit</button></div>
+               <div class="text-center">
+                 <p id="addnew">
+                   <div class="col-md-12 d-flex justify-content-center">
+                     <a href="javascript:new_link_1()" class="add-button text-uppercase font-weight-bold" style="width:100%">Add New Member</a>
+                   </div>
+                 </p>
+                </div>
+                <div class="text-center">
+                  <button type="submit" class="admin-button text-uppercase" name="team_submit" value="1">Submit</button>
+                </div>
            </form>
             <div id="newlinktpl_1" style="display:none">
               <div class="form-row">
-              <div class="col-md-10 form-group">
-                <input type="text" name="names[]" class="form-control" id="names" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required />
-                <div class="validate"></div>
-              </div>
-              <div class="col-md-12 form-group">
-                <input type="text" class="form-control" name="designations[]" id="emails" placeholder="Your Designation" required />
-                <div class="validate"></div>
-              </div>
+                <hr>
+                <div class="col-md-12 ml-2 d-flex justify-content-center">
+                  <h4 class="text-uppercase font-weight-bold">New Member</h4>
+                </div>
+                <hr>
+                <div class="col-md-12 ml-2">
+                  <p class="text-uppercase font-weight-bold">Name</p>
+                </div>
+                <div class="col-md-12 form-group">
+                  <input type="text" name="names[]" class="form-control" required/>
+                </div>
+                <div class="container-fluid">
+                <div class="col-md-12 ml-2">
+                  <p class="text-uppercase font-weight-bold">Designation</p>
+                </div>
+                <div class="col-md-12 form-group">
+                  <input type="text" name="designations[]" class="form-control"  required/>
+                </div>
+                <div class="col-md-12 ml-2">
+                  <p class="text-uppercase font-weight-bold">Profile Image</p>
+                </div>
+                <center>
+                <div class="col-md-10 form-group border border-dark p-2">
+                  <input type="file" name="images[]" accept="image/*">
+                </div>
+                </center>
+                <div class="col-md-12 ml-2">
+                  <p class="text-uppercase font-weight-bold">Phone</p>
+                </div>
+                <div class="col-md-12 form-group">
+                  <input type="number" class="form-control" name="phones[]" required/>
+                </div>
+                <div class="col-md-12 ml-2">
+                  <p class="text-uppercase font-weight-bold">Email</p>
+                </div>
+                <div class="col-md-12 form-group">
+                  <input type="email" class="form-control" name="emails[]" required/>
+                </div>
+                <div class="col-md-12 ml-2">
+                  <p class="text-uppercase font-weight-bold">Linkedin</p>
+                </div>
+                <div class="col-md-12 form-group">
+                  <input type="text" class="form-control" name="linkedins[]" required/>
+                </div>
+                <!-- <div class="text-center col-md-12">
+                  <button type="submit" class="del-button mb-5" name="team_delete">Delete</button>
+                </div> -->
+                </div>
             </div>
-              <div class="form-group">
-                <div class="form-group">
-                  <input type="number" class="form-control" name="phones[]" id="subjects" placeholder="Phone" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" required />
-                  <div class="validate"></div>
-                </div>
-                <div class="form-group">
-                  <input type="email" class="form-control" name="emails[]" id="filters" placeholder="Email" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" required/>
-                  <div class="validate"></div>
-                </div>
-                <div class="form-group">
-                  <input type="text" class="form-control" name="linkedins[]" id="filter" placeholder="Linkedin" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" required/>
-                  <div class="validate"></div>
-                </div>
-              </div>
             </div>
           </div>
 
@@ -562,6 +644,128 @@ function delIt_1(eleId)
 
       </div>
     </section><!-- End Contact Section -->
+    
+    <section id="add-dealer" class="contact section-bg">
+      <div class="container">
+
+        <div class="section-title" data-aos="fade-in" data-aos-delay="100">
+          <h2>Dealers</h2>
+          <p>Manage Dealerships</p>
+        </div>
+
+          <div class="col-lg-12">
+            <form action="admin.php" method="post" >
+              <div id="newlink_2">
+
+                  <?php
+                  foreach ($dealers as $key) {
+
+                  ?>
+                  <hr class="mb-3">
+                  <div class="form-row">
+                    <div class="col-md-12 ml-2">
+                      <p class="text-uppercase font-weight-bold">Dealer Name</p>
+                    </div>
+                    <div class="col-md-12 form-group" style="display:none">
+                      <input type="text" name="id[]" value="<?= $key["0"] ?>" class="form-control" id="id" required/>
+                    </div>
+                    <div class="col-md-10 form-group">
+                      <input type="text" name="name[]" value="<?= $key["1"] ?>" class="form-control" id="name" required/>
+                    </div>
+                    <div class="col-md-2 form-group">
+                      <a class="btn collapse-btn text-white"  onclick="$('#dealer-<?= $key["0"] ?>').slideToggle();">Show / Hide</a>
+                    </div>
+                    <div class="container-fluid" style="display:none" id="dealer-<?= $key["0"] ?>">  
+                      <div class="col-md-12 ml-2">
+                        <p class="text-uppercase font-weight-bold">Description</p>
+                      </div>
+                      <div class="col-md-12 form-group">
+                        <textarea class="form-control" name="description[]" rows="5" data-rule="required" required><?= $key["3"] ?></textarea>
+                      </div>
+                      <div class="col-md-12 ml-2">
+                        <p class="text-uppercase font-weight-bold">Dealer Logo</p>
+                      </div>
+                      <center>
+                      <div class="col-md-10 form-group border border-dark p-2">
+                        <input type="file" id="img" name="image[]" value="<?= $key["2"] ?>" accept="image/*">
+                      </div>
+                      </center>
+                      <div class="col-md-12 ml-2">
+                        <p class="text-uppercase font-weight-bold">Dealer Certificate</p>
+                      </div>
+                      <center>
+                      <div class="col-md-10 form-group border border-dark p-2">
+                        <input type="file" id="img" name="image[]" value="<?= $key["4"] ?>" accept="image/*">
+                      </div>
+                      </center>
+                      <div class="text-center">
+                        <button type="submit" class="del-button mb-5" name="dealer_delete" value="<?= $key[0] ?>">Delete</button>
+                      </div>
+                    </div>
+                  </div>
+                  
+              <?php
+                }
+               ?>
+               </div>
+               <div class="text-center">
+                 <p id="addnew_2">
+                   <div class="col-md-12 d-flex justify-content-center">
+                     <a href="javascript:new_link_2()" class="add-button text-uppercase font-weight-bold" style="width:100%">Add New Dealer</a>
+                   </div>
+                 </p>
+                </div>
+               <div class="text-center">
+                 <button type="submit" class="admin-button text-uppercase" name="product_submit" value="1">Submit</button>
+               </div>
+           </form>
+            <div id="newlinktpl_2" style="display:none">
+              <div class="form-row">
+                <hr>
+                <div class="col-md-12 ml-2 d-flex justify-content-center">
+                  <h4 class="text-uppercase font-weight-bold">New Dealer</h4>
+                </div>
+                <hr>
+                <div class="col-md-12 ml-2">
+                  <p class="text-uppercase font-weight-bold">Dealer Name</p>
+                </div>
+                <div class="col-md-12 form-group">
+                  <input type="text" name="name[]" class="form-control" id="name" required/>
+                </div>
+                <div class="container-fluid">  
+                  <div class="col-md-12 ml-2">
+                    <p class="text-uppercase font-weight-bold">Description</p>
+                  </div>
+                  <div class="col-md-12 form-group">
+                    <textarea class="form-control" name="description[]" rows="5" data-rule="required" required></textarea>
+                  </div>
+                  <div class="col-md-12 ml-2">
+                    <p class="text-uppercase font-weight-bold">Dealer Logo</p>
+                  </div>
+                  <center>
+                  <div class="col-md-10 form-group border border-dark p-2">
+                    <input type="file" id="img" name="image[]" accept="image/*">
+                  </div>
+                  </center>
+                  <div class="col-md-12 ml-2">
+                    <p class="text-uppercase font-weight-bold">Dealer Certificate</p>
+                  </div>
+                  <center>
+                  <div class="col-md-10 form-group border border-dark p-2">
+                    <input type="file" id="img" name="image[]" accept="image/*">
+                  </div>
+                  </center>
+                </div>
+                  </div>
+          </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+    
+    
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
