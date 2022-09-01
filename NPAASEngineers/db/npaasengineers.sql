@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.1
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 20, 2022 at 01:45 AM
--- Server version: 10.1.33-MariaDB
--- PHP Version: 7.2.6
+-- Generation Time: Sep 01, 2022 at 08:28 PM
+-- Server version: 10.1.32-MariaDB
+-- PHP Version: 7.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -41,7 +41,8 @@ CREATE TABLE `dealerships` (
 --
 
 INSERT INTO `dealerships` (`dealer_id`, `dealer_name`, `dealer_image`, `dealer_desc`, `dealer_cert`) VALUES
-(1, 'Ashida', 'assets/img/products/default.jpg', 'Ashida Desc', 'assets/img/products/default.jpg');
+(1, 'Ashida', 'assets/img/delerships/good_old_days.png', 'Ashida Desc', 'assets/img/delerships/default.jpg'),
+(2, 'xxx', 'assets/img/delerships/default.jpg', 'xxxxx', 'assets/img/delerships/default.jpg');
 
 -- --------------------------------------------------------
 
@@ -65,15 +66,17 @@ CREATE TABLE `info` (
   `team_desc` varchar(500) NOT NULL,
   `address` varchar(500) NOT NULL,
   `phone` varchar(500) NOT NULL,
-  `email` varchar(500) NOT NULL
+  `email` varchar(500) NOT NULL,
+  `user_name` varchar(8000) NOT NULL,
+  `password` varchar(8000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `info`
 --
 
-INSERT INTO `info` (`info_id`, `name`, `full_name`, `about`, `imp_point1`, `imp_point2`, `services_desc`, `inquires`, `client_no`, `product_no`, `members_no`, `product_desc`, `team_desc`, `address`, `phone`, `email`) VALUES
-(0, 'NPAAS Engineers', 'Numerical Protection and Automation Application Support Engineers', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit', 'ImpPoint1| sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip', 'ImpPoint2|Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt', 'Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit.', 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,', 232, 432, 23, 'Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui', 'Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui', 'A108 Adam Street, New York, NY 535022', '+1 5589 55488 55', 'contact@example.com');
+INSERT INTO `info` (`info_id`, `name`, `full_name`, `about`, `imp_point1`, `imp_point2`, `services_desc`, `inquires`, `client_no`, `product_no`, `members_no`, `product_desc`, `team_desc`, `address`, `phone`, `email`, `user_name`, `password`) VALUES
+(0, 'NPAAS Engineers', 'Numerical Protection and Automation Application Support Engineers', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit', 'ImpPoint1| sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip', 'ImpPoint2|Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt', 'Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit.', 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,', 232, 432, 23, 'Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui', 'Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui', 'A108 Adam Street, New York, NY 535022', '+1 5589 55488 55', 'contact@example.com', 'xyz', '5f4dcc3b5aa765d61d8327deb882cf99');
 
 -- --------------------------------------------------------
 
@@ -96,8 +99,10 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `product_name`, `product_service`, `product_description`, `product_list`, `product_image`, `product_filter`) VALUES
-(1, 'Test1', 'Test1_service', 'Test1_desc', 'a123|b1234', 'assets/img/products/default.jpg', 'a'),
-(2, 'Test22', 'Test22_ser', 'Test22_sadghsadghsjagd', 'aasd123|bds1234|nbn12', 'assets/img/products/default.jpg', 'a');
+(1, 'Test111', 'Test1_service', 'Test1_desc', 'a123|b1234', 'assets/img/products/good_old_days.png', 'a'),
+(2, 'Test22', 'Test22_ser', 'Test22_sadghsadghsjagd', 'aasd123|bds1234|nbn12', 'assets/img/products/Dazai-Osamu-At-The-Detective-Agency-Bungo-Stray-Dogs.png', 'a'),
+(5, 'dsadsa', 'asdsad', 'dasdsa', 'asdsad', 'assets/img/products/Stand-By-Me.jpg', 'dasda'),
+(6, 'dddd', 'ddd', 'dddd', 'ddd', 'assets/img/products/default.jpg', 'ddd');
 
 -- --------------------------------------------------------
 
@@ -133,19 +138,28 @@ CREATE TABLE `team` (
   `team_designation` varchar(8000) NOT NULL,
   `team_phone` varchar(200) NOT NULL,
   `team_email` varchar(8000) NOT NULL,
-  `team_linkedin` varchar(8000) NOT NULL
+  `team_linkedin` varchar(8000) NOT NULL,
+  `team_image` varchar(8000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `team`
 --
 
-INSERT INTO `team` (`team_id`, `team_name`, `team_designation`, `team_phone`, `team_email`, `team_linkedin`) VALUES
-(1, 'Pravin Talekar', 'Director', '987654321', 'example@example.com', 'linkedin.com');
+INSERT INTO `team` (`team_id`, `team_name`, `team_designation`, `team_phone`, `team_email`, `team_linkedin`, `team_image`) VALUES
+(1, 'Pravin Talekar', 'Director', '987654321', 'example@example.com', 'linkedin.com', 'assets/img/team/good_old_days.png'),
+(2, 'xyz', 'sasss', '3456789876', 'dfds@dsd.com', 'ssasas', 'assets/img/team/Dazai-Osamu-At-The-Detective-Agency-Bungo-Stray-Dogs.png'),
+(3, 'ttt', 'ttt', '444', 'fdf@dsd.com', 'dsdsd', 'assets/img/team/Stand-By-Me.jpg');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `dealerships`
+--
+ALTER TABLE `dealerships`
+  ADD PRIMARY KEY (`dealer_id`);
 
 --
 -- Indexes for table `info`
@@ -176,16 +190,22 @@ ALTER TABLE `team`
 --
 
 --
+-- AUTO_INCREMENT for table `dealerships`
+--
+ALTER TABLE `dealerships`
+  MODIFY `dealer_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `team`
 --
 ALTER TABLE `team`
-  MODIFY `team_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `team_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
