@@ -67,7 +67,7 @@ $info = mysqli_fetch_assoc($result_info);
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="">Main</a></li>        
+          <li class="active"><a href="#hero">Main</a></li>        
           <li><a href="#products">Products</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -167,10 +167,30 @@ $info = mysqli_fetch_assoc($result_info);
 
         <div class="section-title" data-aos="fade-in" data-aos-delay="100">
           <h2>Contact</h2>
-          <p> for Queries about <?= $prod['product_name'] ?></p>
+          <p> For more Queries about <b><?= $prod['product_name'] ?></b></p>
+        </div>
+        
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+
+          <div class="col-lg-6 col-md-6">
+            <div class="info-box  mb-4">
+              <i class="bx bx-envelope"></i>
+              <h3>Email Us</h3>
+              <a class="text-dark" href="mailto:<?= $info['email'] ?>"><?= $info['email'] ?></a>
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-md-6">
+            <div class="info-box  mb-4">
+              <i class="bx bx-phone-call"></i>
+              <h3>Call Us</h3>
+              <a class="text-dark" href="tel:<?= $info['phone'] ?>"><?= $info['phone'] ?></a>
+            </div>
+          </div>
+
         </div>
 
-          <div class="col-lg-12">
+          <div class="col-lg-12 d-none resurrect">
             <form action="forms/contact.php" method="post" role="form" class="php-email-form">
               <div class="form-row">
                 <div class="col-md-6 form-group">

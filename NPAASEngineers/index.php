@@ -364,7 +364,7 @@ $info = mysqli_fetch_assoc($result_info);
             <div class="info-box  mb-4">
               <i class="bx bx-envelope"></i>
               <h3>Email Us</h3>
-              <p><?= $info['email'] ?></p>
+              <a class="text-dark" href="mailto:<?= $info['email'] ?>"><?= $info['email'] ?></a>
             </div>
           </div>
 
@@ -372,7 +372,7 @@ $info = mysqli_fetch_assoc($result_info);
             <div class="info-box  mb-4">
               <i class="bx bx-phone-call"></i>
               <h3>Call Us</h3>
-              <p><?= $info['phone'] ?></p>
+              <a class="text-dark" href="tel:<?= $info['phone'] ?>"><?= $info['phone'] ?></a>
             </div>
           </div>
 
@@ -384,7 +384,7 @@ $info = mysqli_fetch_assoc($result_info);
             <iframe class="mb-4 mb-lg-0" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe>
           </div> -->
 
-          <div class="col-lg-12">
+          <div class="col-lg-12 d-none resurrect">
             <form action="forms/contact.php" method="post" role="form" class="php-email-form">
               <div class="form-row">
                 <div class="col-md-6 form-group">
@@ -432,8 +432,12 @@ $info = mysqli_fetch_assoc($result_info);
               <p class="pb-3"><em><?= $info['full_name'] ?></em></p>
               <p>
                 <?= $info['address'] ?><br>
-                <strong>Phone:</strong> <?= $info['phone'] ?><br>
-                <strong>Email:</strong> <?= $info['email'] ?><br>
+                <strong>Phone:</strong> 
+                <a class="text-dark" href="tel:<?= $info['phone'] ?>"><?= $info['phone'] ?></a>
+                <br>
+                <strong>Email:</strong> 
+                <a class="text-dark" href="mailto:<?= $info['email'] ?>"><?= $info['email'] ?></a>
+                <br>
               </p>
             </div>
           </div>
