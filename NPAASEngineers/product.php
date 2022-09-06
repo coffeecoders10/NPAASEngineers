@@ -12,7 +12,7 @@ $result_info = mysqli_query($db, $info_query);
 $info = mysqli_fetch_assoc($result_info);
 
  ?>
- 
+
 <html lang="en">
 
 <head>
@@ -54,7 +54,7 @@ $info = mysqli_fetch_assoc($result_info);
 <body>
 
   <!-- ======= Header ======= -->
-  
+
 
   <header id="header" class="fixed-top">
     <div class="container d-flex">
@@ -67,7 +67,7 @@ $info = mysqli_fetch_assoc($result_info);
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="#hero">Main</a></li>        
+          <li class="active"><a href="#hero">Main</a></li>
           <li><a href="#products">Products</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -81,7 +81,7 @@ $info = mysqli_fetch_assoc($result_info);
   <!-- ======= Hero Section ======= -->
   <section id="hero">
     <div class="hero-container" data-aos="fade-up">
-      <img class="mb-5" src="<?= $prod['product_image'] ?>" style="height:40vh">
+      <img class="mb-5" src="assets/img/<?= $prod['product_image'] ?>" style="height:40vh">
       <h1><?= $prod['product_name'] ?></h1>
       <!-- <h2></h2> -->
       <a href="#products" class="btn-get-started scrollto"><i class="bx bx-chevrons-down"></i></a>
@@ -97,13 +97,13 @@ $info = mysqli_fetch_assoc($result_info);
         <div class="section-title" data-aos="fade-in" data-aos-delay="100">
           <h2>Products Available</h2>
         </div>
-        
+
         <div class="row d-flex justify-content-center">
-        <?php 
+        <?php
           $prod_array = explode("|",$prod['product_list']);
           for ($i = 0; $i < count($prod_array); $i++) {
             ?>
-            
+
             <div class="col-md-6 col-lg-3 d-flex align-items-center mb-3">
               <div class="icon-box d-flex justify-content-start align-items-center" data-aos="fade-up" style="width:100%;padding-bottom:10px">
                 <div class="icon pr-3"><i class='bx bxs-box'></i></div>
@@ -111,13 +111,13 @@ $info = mysqli_fetch_assoc($result_info);
                 <p class="description"></p>
               </div>
             </div>
-            
+
           <?php
           }
          ?>
 
-        
-          
+
+
 
           <!-- <div class="col-md-6 col-lg-3 d-flex align-items-center mb-3">
             <div class="icon-box d-flex justify-content-start align-items-center" data-aos="fade-up" style="width:100%;padding-bottom:10px">
@@ -169,7 +169,7 @@ $info = mysqli_fetch_assoc($result_info);
           <h2>Contact</h2>
           <p> For more Queries about <b><?= $prod['product_name'] ?></b></p>
         </div>
-        
+
         <div class="row" data-aos="fade-up" data-aos-delay="100">
 
           <div class="col-lg-6 col-md-6">
@@ -247,14 +247,14 @@ $info = mysqli_fetch_assoc($result_info);
           <div class="col-lg-2 col-md-6 footer-links" data-aos="fade-up" data-aos-delay="250">
             <h4>Our Services</h4>
             <ul>
-              <?php 
+              <?php
               $services_query = "SELECT * FROM services";
               $result_services = mysqli_query($db, $services_query);
               while($row = mysqli_fetch_assoc($result_services)){
                 // echo $row['service_name'];
                 ?>
               <li><i class="bx bx-chevron-right"></i><?= $row['service_name']?></li>
-              <?php 
+              <?php
             }
                 ?>
             </ul>

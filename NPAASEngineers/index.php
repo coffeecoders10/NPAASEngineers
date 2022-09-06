@@ -69,7 +69,7 @@ $info = mysqli_fetch_assoc($result_info);
         document.getElementById("full_name").innerHTML = data.full_name;
     });
   </script> -->
-  
+
   <header id="header" class="fixed-top">
     <div class="container d-flex">
 
@@ -86,13 +86,13 @@ $info = mysqli_fetch_assoc($result_info);
           <li><a href="#services">Services</a></li>
           <li class="drop-down"><a href="#products">Products</a>
             <ul>
-              <?php 
+              <?php
               $products_query = "SELECT * FROM products";
               $result_products = mysqli_query($db, $products_query);
               while($row = mysqli_fetch_assoc($result_products)){
                 ?>
               <li><a href="product.php?name=<?= $row['product_name'] ?>" target="_blank"><?= $row['product_name'] ?></a></li>
-              <?php 
+              <?php
               }
                 ?>
               <!-- <li class="drop-down"><a href="#">Drop Down 2</a>
@@ -141,14 +141,14 @@ $info = mysqli_fetch_assoc($result_info);
                 <?= $info['about'] ?>
               </p>
               <h3>Dealerships</h3>
-              <?php 
+              <?php
               $dealer_query = "SELECT * FROM dealerships";
               $result_dealer = mysqli_query($db, $dealer_query);
               while($row = mysqli_fetch_assoc($result_dealer)){
                 ?>
               <div class="row">
                 <div class="col-12 col-lg-4 d-flex justify-content-center">
-                  <img class="mb-5" src="<?= $row['dealer_image'] ?>" style="width:75%">
+                  <img class="mb-5" src="assets/img/<?= $row['dealer_image'] ?>" style="width:75%">
                 </div>
                 <div class="col-12 col-lg-8">
                   <h4 class="text-uppercase font-weight-bold"><?= $row['dealer_name'] ?></h4>
@@ -156,12 +156,12 @@ $info = mysqli_fetch_assoc($result_info);
                     <?= $row['dealer_desc'] ?>
                   </p>
                   <div class="row d-flex justify-content-center">
-                    <a class="cert-btn" href="<?= $row['dealer_cert'] ?>">Certificate</a>
+                    <a class="cert-btn" target="_blank" href="<?= 'assets/img/'.$row['dealer_cert'] ?>">Certificate</a>
                   </div>
                 </div>
-                
+
               </div>
-              <?php 
+              <?php
               }
                 ?>
               <!-- <a href="#" class="about-btn">About us <i class="bx bx-chevron-right"></i></a> -->
@@ -182,8 +182,8 @@ $info = mysqli_fetch_assoc($result_info);
         </div>
 
         <div class="row d-flex justify-content-center align-items-center">
-          
-          <?php 
+
+          <?php
           $services_query = "SELECT * FROM services";
           $result_services = mysqli_query($db, $services_query);
           while($row = mysqli_fetch_assoc($result_services)){
@@ -196,7 +196,7 @@ $info = mysqli_fetch_assoc($result_info);
                 <p class="description"><?= $row['service_desc'] ?></p>
               </div>
             </div>
-            
+
             <?php
           }
           ?>
@@ -274,15 +274,15 @@ $info = mysqli_fetch_assoc($result_info);
         </div> -->
 
         <div class="row portfolio-container" data-aos="fade-up">
-          
-          <?php 
+
+          <?php
           $products_query = "SELECT * FROM products";
           $result_products = mysqli_query($db, $products_query);
           while($row = mysqli_fetch_assoc($result_products)){
             ?>
             <div class="col-lg-4 col-md-6 portfolio-item filter-type-<?=$row['product_filter']?>">
               <div class="portfolio-wrap">
-                <img src="<?=$row['product_image']?>" class="img-fluid" alt="">
+                <img src="assets/img/<?=$row['product_image']?>" class="img-fluid" alt="">
                 <div class="portfolio-links">
                   <a href="product.php?name=<?=$row['product_name']?>" title="More Details" class="text-uppercase view-prod"><i class="bx bx-link"></i> View Products</a>
                 </div>
@@ -291,8 +291,8 @@ $info = mysqli_fetch_assoc($result_info);
                 <?=$row['product_name']?>
               </div>
             </div>
-            
-            <?php 
+
+            <?php
           }
               ?>
 
@@ -311,8 +311,8 @@ $info = mysqli_fetch_assoc($result_info);
         </div>
 
         <div class="row d-flex justify-content-center align-items-center">
-          
-          <?php 
+
+          <?php
           $team_query = "SELECT * FROM team";
           $result_team = mysqli_query($db, $team_query);
           while($row = mysqli_fetch_assoc($result_team)){
@@ -320,7 +320,7 @@ $info = mysqli_fetch_assoc($result_info);
 
           <div class="col-lg-4 col-md-6">
             <div class="member" data-aos="fade-up">
-              <div class="pic"><img src="assets/img/team/team-1.jpg" class="img-fluid" alt=""></div>
+              <div class="pic"><img src="assets/img/<?= $row['team_image'] ?>" class="img-fluid" alt=""></div>
               <div class="member-info">
                 <h4><?= $row['team_name'] ?></h4>
                 <span><?= $row['team_designation'] ?></span>
@@ -332,8 +332,8 @@ $info = mysqli_fetch_assoc($result_info);
               </div>
             </div>
           </div>
-          
-          <?php 
+
+          <?php
         }
             ?>
 
@@ -432,10 +432,10 @@ $info = mysqli_fetch_assoc($result_info);
               <p class="pb-3"><em><?= $info['full_name'] ?></em></p>
               <p>
                 <?= $info['address'] ?><br>
-                <strong>Phone:</strong> 
+                <strong>Phone:</strong>
                 <a class="text-dark" href="tel:<?= $info['phone'] ?>"><?= $info['phone'] ?></a>
                 <br>
-                <strong>Email:</strong> 
+                <strong>Email:</strong>
                 <a class="text-dark" href="mailto:<?= $info['email'] ?>"><?= $info['email'] ?></a>
                 <br>
               </p>
@@ -445,14 +445,14 @@ $info = mysqli_fetch_assoc($result_info);
           <div class="col-lg-2 col-md-6 footer-links" data-aos="fade-up" data-aos-delay="250">
             <h4>Our Services</h4>
             <ul>
-              <?php 
+              <?php
               $services_query = "SELECT * FROM services";
               $result_services = mysqli_query($db, $services_query);
               while($row = mysqli_fetch_assoc($result_services)){
                 // echo $row['service_name'];
                 ?>
               <li><i class="bx bx-chevron-right"></i><?= $row['service_name']?></li>
-              <?php 
+              <?php
             }
                 ?>
             </ul>

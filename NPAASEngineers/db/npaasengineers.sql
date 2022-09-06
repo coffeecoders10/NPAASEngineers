@@ -147,9 +147,7 @@ CREATE TABLE `team` (
 --
 
 INSERT INTO `team` (`team_id`, `team_name`, `team_designation`, `team_phone`, `team_email`, `team_linkedin`, `team_image`) VALUES
-(1, 'Pravin Talekar', 'Director', '987654321', 'example@example.com', 'linkedin.com', 'assets/img/team/good_old_days.png'),
-(2, 'xyz', 'sasss', '3456789876', 'dfds@dsd.com', 'ssasas', 'assets/img/team/Dazai-Osamu-At-The-Detective-Agency-Bungo-Stray-Dogs.png'),
-(3, 'ttt', 'ttt', '444', 'fdf@dsd.com', 'dsdsd', 'assets/img/team/Stand-By-Me.jpg');
+(1, 'Pravin Talekar', 'Director', '987654321', 'example@example.com', 'linkedin.com', 'team/good_old_days.png')
 
 --
 -- Indexes for dumped tables

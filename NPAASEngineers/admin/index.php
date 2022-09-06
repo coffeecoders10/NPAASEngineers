@@ -19,6 +19,10 @@ $team = mysqli_fetch_all($result_team);
 $dealers_query = "SELECT * FROM dealerships";
 $result_dealers = mysqli_query($db, $dealers_query);
 $dealers = mysqli_fetch_all($result_dealers);
+
+$services_query = "SELECT * FROM services";
+$result_services = mysqli_query($db, $services_query);
+$services = mysqli_fetch_all($result_services);
 // echo $products;
 
 
@@ -43,7 +47,7 @@ $dealers = mysqli_fetch_all($result_dealers);
     // echo $update_sql;
     $result_update = mysqli_query($db, $update_sql);
     // echo $result_update;
-    header("Location: admin.php");
+    header("Location: index.php");
   }
   else if(isset($_POST["product_submit"])){
     $id = $_POST["id"];
@@ -57,8 +61,10 @@ $dealers = mysqli_fetch_all($result_dealers);
     $n = count($id);
     for ($x = 0; $x < $n; $x++) {
       if($image['name'][$x] != ""){
-        $img_path = "../assets/img/products/".$image['name'][$x];
-        move_uploaded_file($image['tmp_name'][$x], $img_path);
+        $img_path = "products/".$image['name'][$x];
+        // $cpy_path = "../assets/img/".$img_path;
+        // echo $cpy_path;
+        move_uploaded_file($image['tmp_name'][$x], "../assets/img/".$img_path);
       }
       else{
         $img_path = $image_name[$x];
@@ -76,22 +82,22 @@ $dealers = mysqli_fetch_all($result_dealers);
     $l = count($names);
     for ($x = 0; $x < $l; $x++) {
       if($images['name'][$x] != ""){
-        $img_path = "../assets/img/products/".$images['name'][$x];
-        move_uploaded_file($images['tmp_name'][$x], $img_path);
+        $img_path = "products/".$images['name'][$x];
+        move_uploaded_file($images['tmp_name'][$x], "../assets/img/".$img_path);
       }
       else{
-        $img_path = "../assets/img/products/default.jpg";
+        $img_path = "products/default.jpg";
       }
       $insert_sql = "INSERT INTO `products`(`product_name`, `product_service`, `product_description`, `product_list`, `product_image`, `product_filter`) VALUES ('$names[$x]','$services[$x]','$descriptions[$x]','$product_lists[$x]','$img_path','$filters[$x]')";
       $result_insert = mysqli_query($db, $insert_sql);
     }
-    header("Location: admin.php");
+    header("Location: index.php");
   }
   else if(isset($_POST["product_delete"])){
     $id = $_POST["product_delete"];
     $delete_sql = "DELETE FROM `products` WHERE `product_id`='$id'";
     $result_delete = mysqli_query($db, $delete_sql);
-    header("Location: admin.php");
+    header("Location: index.php");
   }
   else if(isset($_POST["team_submit"])){
     $id = $_POST["id"];
@@ -106,8 +112,8 @@ $dealers = mysqli_fetch_all($result_dealers);
     $n = count($id);
     for ($x = 0; $x < $n; $x++) {
       if($image['name'][$x] != ""){
-        $img_path = "../assets/img/team/".$image['name'][$x];
-        move_uploaded_file($image['tmp_name'][$x], $img_path);
+        $img_path = "team/".$image['name'][$x];
+        move_uploaded_file($image['tmp_name'][$x], "../assets/img/".$img_path);
       }
       else{
         $img_path = $image_name[$x];
@@ -126,22 +132,22 @@ $dealers = mysqli_fetch_all($result_dealers);
     $l = count($names);
     for ($x = 0; $x < $l; $x++) {
       if($images['name'][$x] != ""){
-        $img_path = "../assets/img/team/".$images['name'][$x];
-        move_uploaded_file($images['tmp_name'][$x], $img_path);
+        $img_path = "team/".$images['name'][$x];
+        move_uploaded_file($images['tmp_name'][$x], "../assets/img/".$img_path);
       }
       else{
-        $img_path = "../assets/img/team/default.jpg";
+        $img_path = "team/default.jpg";
       }
       $insert_sql = "INSERT INTO `team`(`team_name`, `team_designation`, `team_phone`, `team_email`, `team_linkedin`,`team_image`) VALUES ('$names[$x]','$designations[$x]','$phones[$x]','$emails[$x]','$linkedins[$x]','$img_path')";
       $result_insert = mysqli_query($db, $insert_sql);
     }
-    header("Location: admin.php");
+    header("Location: index.php");
   }
   else if(isset($_POST["team_delete"])){
     $id = $_POST["team_delete"];
     $delete_sql = "DELETE FROM `team` WHERE `team_id`='$id'";
     $result_delete = mysqli_query($db, $delete_sql);
-    header("Location: admin.php");
+    header("Location: index.php");
   }
   else if(isset($_POST["dealer_submit"])){
     $id = $_POST["id"];
@@ -154,15 +160,15 @@ $dealers = mysqli_fetch_all($result_dealers);
     $n = count($id);
     for ($x = 0; $x < $n; $x++) {
       if($image_logo['name'][$x] != ""){
-        $img_path_logo = "../assets/img/delerships/".$image_logo['name'][$x];
-        move_uploaded_file($image_logo['tmp_name'][$x], $img_path_logo);
+        $img_path_logo = "delerships/".$image_logo['name'][$x];
+        move_uploaded_file($image_logo['tmp_name'][$x], "../assets/img/".$img_path_logo);
       }
       else{
         $img_path_logo = $image_logo_name[$x];
       }
       if($image_certificate['name'][$x] != ""){
-        $img_path_certificate = "../assets/img/delershipsdelerships/".$image_certificate['name'][$x];
-        move_uploaded_file($image_certificate['tmp_name'][$x], $img_path_certificate);
+        $img_path_certificate = "delerships/".$image_certificate['name'][$x];
+        move_uploaded_file($image_certificate['tmp_name'][$x], "../assets/img/".$img_path_certificate);
       }
       else{
         $img_path_certificate = $image_certificate_name[$x];
@@ -178,29 +184,29 @@ $dealers = mysqli_fetch_all($result_dealers);
     $l = count($names);
     for ($x = 0; $x < $l; $x++) {
       if($image_logos['name'][$x] != ""){
-        $img_path_logo = "../assets/img/delerships/".$image_logos['name'][$x];
-        move_uploaded_file($image_logos['tmp_name'][$x], $img_path_logo);
+        $img_path_logo = "delerships/".$image_logos['name'][$x];
+        move_uploaded_file($image_logos['tmp_name'][$x], "../assets/img/".$img_path_logo);
       }
       else{
-        $img_path_logo = "../assets/img/delerships/default.jpg";
+        $img_path_logo = "delerships/default.jpg";
       }
       if($image_certificates['name'][$x] != ""){
-        $img_path_certificate = "../assets/img/delerships/".$image_certificates['name'][$x];
-        move_uploaded_file($image_certificates['tmp_name'][$x], $img_path_certificate);
+        $img_path_certificate = "delerships/".$image_certificates['name'][$x];
+        move_uploaded_file($image_certificates['tmp_name'][$x], "../assets/img/".$img_path_certificate);
       }
       else{
-        $img_path_certificate = "../assets/img/delerships/default.jpg";
+        $img_path_certificate = "delerships/default.jpg";
       }
       $insert_sql = "INSERT INTO `dealerships`(`dealer_name`, `dealer_image`, `dealer_desc`, `dealer_cert`) VALUES ('$names[$x]','$img_path_logo','$descriptions[$x]','$img_path_certificate')";
       $result_insert = mysqli_query($db, $insert_sql);
     }
-    header("Location: admin.php");
+    header("Location: index.php");
   }
   else if(isset($_POST["dealer_delete"])){
     $id = $_POST["dealer_delete"];
     $delete_sql = "DELETE FROM `dealerships` WHERE `dealer_id`='$id'";
     $result_delete = mysqli_query($db, $delete_sql);
-    header("Location: admin.php");
+    header("Location: index.php");
   }
   else if(isset($_POST["password_button"])){
     $name = $_POST["user_name"];
@@ -210,8 +216,34 @@ $dealers = mysqli_fetch_all($result_dealers);
       $update_sql = "UPDATE `info` SET `user_name`='$name',`password`= '$new_password' WHERE `info_id`= 0";
       $result_delete = mysqli_query($db, $update_sql);
       $_SESSION["Login"] = 0;
-      header("Location: admin.php");
+      header("Location: index.php");
     }
+  }
+  else if(isset($_POST["services_submit"])){
+    $id = $_POST["id"];
+    $name = $_POST["name"];
+    $desc = $_POST["desc"];
+    $n = count($id);
+    for ($x = 0; $x < $n; $x++) {
+      $update_sql = "UPDATE `services` SET `service_name`='$name[$x]',`service_desc`='$desc[$x]' WHERE `service_id`=$id[$x]";
+      $result_update = mysqli_query($db, $update_sql);
+    }
+
+    $names = $_POST["names"];
+    $descs = $_POST["descs"];
+    $l = count($names);
+    for ($x = 0; $x < $l; $x++) {
+      $insert_sql = "INSERT INTO `services`(`service_name`, `service_desc`) VALUES ('$names[$x]','$descs[$x]')";
+      echo $insert_sql;
+      $result_insert = mysqli_query($db, $insert_sql);
+    }
+    header("Location: index.php");
+  }
+  else if(isset($_POST["services_delete"])){
+    $id = $_POST["services_delete"];
+    $delete_sql = "DELETE FROM `services` WHERE `service_id`=$id";
+    $result_delete = mysqli_query($db, $delete_sql);
+    header("Location: index.php");
   }
  ?>
 <html lang="en">
@@ -260,6 +292,7 @@ This script is identical to the above JavaScript function.
 var ct = 1;
 var ct_1 = 1;
 var ct_2 = 1;
+var ct_3 = 1;
 function new_link()
 {
 	ct++;
@@ -319,6 +352,26 @@ function delIt_2(eleId)
 	var parentEle = d.getElementById('newlink_2');
 	parentEle.removeChild(ele);
 }
+
+function new_link_3()
+{
+	ct_3++;
+	var div1 = document.createElement('div');
+	div1.id = ct_3;
+	// link to delete extended form elements
+  var delLink = '<div class="col-md-12 text-right mt-3 mb-5"><a href="javascript:delIt_3('+ ct_3 +')" class="del-button mb-5" >Delete</button></div>';
+	// var delLink = '<div style="text-align:right;margin-right:65px"><a href="javascript:delIt_2('+ ct_1 +')">Del</a></div>';
+	div1.innerHTML = document.getElementById('newlinktpl_3').innerHTML + delLink;
+	document.getElementById('newlink_3').appendChild(div1);
+}
+// function to delete the newly added set of elements
+function delIt_3(eleId)
+{
+	d = document;
+	var ele = d.getElementById(eleId);
+	var parentEle = d.getElementById('newlink_3');
+	parentEle.removeChild(ele);
+}
 </script>
 
   <!-- ======= Header ======= -->
@@ -366,7 +419,7 @@ function delIt_2(eleId)
         </div>
 
         <!-- <div class="row d-flex justify-content-center"> -->
-          <form name="info_details" action="admin.php" method="post">
+          <form name="info_details" action="index.php" method="post">
             <div class="row">
               <div class="col-md-12 mb-1">
                 <h5 class="text-uppercase">User Name</h5>
@@ -405,7 +458,7 @@ function delIt_2(eleId)
         </div>
 
         <!-- <div class="row d-flex justify-content-center"> -->
-          <form name="info_details" action="admin.php" method="post">
+          <form name="info_details" action="index.php" method="post">
             <div class="row">
               <div class="col-md-12 mb-1">
                 <h5 class="text-uppercase">Name</h5>
@@ -509,7 +562,7 @@ function delIt_2(eleId)
         </div>
 
           <div class="col-lg-12">
-            <form action="admin.php" method="post" enctype="multipart/form-data">
+            <form action="index.php" method="post" enctype="multipart/form-data">
               <div id="newlink">
 
                   <?php
@@ -554,7 +607,7 @@ function delIt_2(eleId)
                         <p class="text-uppercase font-weight-bold">Product Image</p>
                       </div>
                       <div class="col-md-12 ml-2">
-                        <img src="<?= $key["5"] ?>" style="height:170px; width:auto; max-width:500px;">
+                        <img src="../assets/img/<?= $key["5"] ?>" style="height:170px; width:auto; max-width:500px;">
                       </div>
                       <center>
                       <div class="col-md-10 form-group border border-dark p-2" style="display:none">
@@ -657,7 +710,7 @@ function delIt_2(eleId)
         </div>
 
           <div class="col-lg-12">
-            <form action="admin.php" method="post" enctype="multipart/form-data">
+            <form action="index.php" method="post" enctype="multipart/form-data">
               <div id="newlink_1">
                   <?php
                   foreach ($team as $key) {
@@ -687,7 +740,7 @@ function delIt_2(eleId)
                       <p class="text-uppercase font-weight-bold">Profile Image</p>
                     </div>
                     <div class="col-md-12 ml-2">
-                      <img src="<?= $key["6"] ?>" style="height:170px; width:auto; max-width:500px;">
+                      <img src="../assets/img/<?= $key["6"] ?>" style="height:170px; width:auto; max-width:500px;">
                     </div>
                     <center>
                     <div class="col-md-10 form-group border border-dark p-2" style="display:none">
@@ -805,7 +858,7 @@ function delIt_2(eleId)
         </div>
 
           <div class="col-lg-12">
-            <form action="admin.php" method="post" enctype="multipart/form-data">
+            <form action="index.php" method="post" enctype="multipart/form-data">
               <div id="newlink_2">
 
                   <?php
@@ -837,7 +890,7 @@ function delIt_2(eleId)
                         <p class="text-uppercase font-weight-bold">Dealer Logo</p>
                       </div>
                       <div class="col-md-12 ml-2">
-                        <img src="<?= $key["2"] ?>" style="height:170px; width:auto; max-width:500px;">
+                        <img src="../assets/img/<?= $key["2"] ?>" style="height:170px; width:auto; max-width:500px;">
                       </div>
                       <center>
                       <div class="col-md-10 form-group border border-dark p-2" style="display:none">
@@ -851,14 +904,14 @@ function delIt_2(eleId)
                         <p class="text-uppercase font-weight-bold">Dealer Certificate</p>
                       </div>
                       <div class="col-md-12 ml-2">
-                        <img src="<?= $key["4"] ?>" style="height:170px; width:auto; max-width:500px;">
+                        <p><?php $name_array = explode("/",$key["4"]); $name = end($name_array) ?> <?= $name; ?></p>
                       </div>
                       <center>
                       <div class="col-md-10 form-group border border-dark p-2" style="display:none">
                         <input type="text" id="img" name="image_certificate_name[]" value="<?= $key["4"] ?>">
                       </div>
                       <div class="col-md-10 form-group border border-dark p-2">
-                        <input type="file" id="img" name="image_certificate[]" value="<?= $key["4"] ?>" accept="image/*">
+                        <input type="file" id="img" name="image_certificate[]" value="<?= $key["4"] ?>">
                       </div>
                       </center>
                       <div class="text-center">
@@ -915,9 +968,91 @@ function delIt_2(eleId)
                   </div>
                   <center>
                   <div class="col-md-10 form-group border border-dark p-2">
-                    <input type="file" id="img" name="image_certificates[]" accept="image/*">
+                    <input type="file" id="img" name="image_certificates[]">
                   </div>
                   </center>
+                </div>
+                  </div>
+          </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+    <section id="add-services" class="contact section-bg">
+      <div class="container">
+
+        <div class="section-title" data-aos="fade-in" data-aos-delay="100">
+          <h2>Services</h2>
+          <p>Manage Dealerships</p>
+        </div>
+
+          <div class="col-lg-12">
+            <form action="index.php" method="post" enctype="multipart/form-data">
+              <div id="newlink_3">
+
+                  <?php
+                  foreach ($services as $key) {
+
+                  ?>
+                  <hr class="mb-3">
+                  <div class="form-row">
+                    <div class="col-md-12 ml-2">
+                      <p class="text-uppercase font-weight-bold">Service Name</p>
+                    </div>
+                    <div class="col-md-12 form-group" style="display:none">
+                      <input type="text" name="id[]" value="<?= $key["0"] ?>" class="form-control" id="id" required/>
+                    </div>
+                    <div class="col-md-10 form-group">
+                      <input type="text" name="name[]" value="<?= $key["1"] ?>" class="form-control" id="name" required/>
+                    </div>
+                    <div class="col-md-12 ml-2">
+                      <p class="text-uppercase font-weight-bold">Service Description</p>
+                    </div>
+                    <div class="col-md-10 form-group">
+                      <input type="text" name="desc[]" value="<?= $key["2"] ?>" class="form-control" id="desc" required/>
+                    </div>
+                      <div class="text-center">
+                        <button type="submit" class="del-button mb-5" name="services_delete" value="<?= $key[0] ?>">Delete</button>
+                      </div>
+                    </div>
+
+              <?php
+                }
+               ?>
+               </div>
+               <div class="text-center">
+                 <p id="addnew_3">
+                   <div class="col-md-12 d-flex justify-content-center">
+                     <a href="javascript:new_link_3()" class="add-button text-uppercase font-weight-bold" style="width:100%">Add New Service</a>
+                   </div>
+                 </p>
+                </div>
+               <div class="text-center">
+                 <button type="submit" class="admin-button text-uppercase" name="services_submit" value="1">Submit</button>
+               </div>
+           </form>
+            <div id="newlinktpl_3" style="display:none">
+              <div class="form-row">
+                <hr>
+                <div class="col-md-12 ml-2 d-flex justify-content-center">
+                  <h4 class="text-uppercase font-weight-bold">New Service</h4>
+                </div>
+                <hr>
+                <div class="col-md-12 ml-2">
+                  <p class="text-uppercase font-weight-bold">Service Name</p>
+                </div>
+                <div class="col-md-10 form-group">
+                  <input type="text" name="names[]" class="form-control" id="name" required/>
+                </div>
+                <div class="col-md-12 ml-2">
+                  <p class="text-uppercase font-weight-bold">Service Description</p>
+                </div>
+                <div class="col-md-10 form-group">
+                  <input type="text" name="descs[]" class="form-control" id="desc" required/>
+                </div>
                 </div>
                   </div>
           </div>
