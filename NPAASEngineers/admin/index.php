@@ -392,6 +392,7 @@ function delIt_3(eleId)
           <!-- <li></li> -->
           <li><a href="#add-team">Team</a></li>
           <li><a href="#add-dealer">Dealer</a></li>
+          <li><a href="#services">Services</a></li>
 
         </ul>
       </nav><!-- .nav-menu -->
@@ -981,12 +982,12 @@ function delIt_3(eleId)
       </div>
     </section><!-- End Contact Section -->
 
-    <section id="add-services" class="contact section-bg">
+    <section id="services" class="contact section-bg">
       <div class="container">
 
         <div class="section-title" data-aos="fade-in" data-aos-delay="100">
           <h2>Services</h2>
-          <p>Manage Dealerships</p>
+          <p>Manage Services</p>
         </div>
 
           <div class="col-lg-12">

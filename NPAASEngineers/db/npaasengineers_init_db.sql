@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 4.8.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 06, 2022 at 10:55 PM
--- Server version: 10.1.32-MariaDB
--- PHP Version: 7.0.30
+-- Generation Time: Sep 08, 2022 at 06:14 PM
+-- Server version: 10.1.33-MariaDB
+-- PHP Version: 7.2.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -41,8 +41,7 @@ CREATE TABLE `dealerships` (
 --
 
 INSERT INTO `dealerships` (`dealer_id`, `dealer_name`, `dealer_image`, `dealer_desc`, `dealer_cert`) VALUES
-(1, 'Ashida', 'delerships/good_old_days.png', 'Ashida Desc', 'delerships/default.jpg'),
-(5, 'dsdsa', 'delerships/Wedding_Invitation_Chan.png', 'dsdsdsds', 'delerships/Wedding_Invitation_F.pdf');
+(1, 'Ashida', 'delerships/default.jpg', 'Ashida Desc', 'delerships/default.jpg');
 
 -- --------------------------------------------------------
 
@@ -76,7 +75,7 @@ CREATE TABLE `info` (
 --
 
 INSERT INTO `info` (`info_id`, `name`, `full_name`, `about`, `imp_point1`, `imp_point2`, `services_desc`, `inquires`, `client_no`, `product_no`, `members_no`, `product_desc`, `team_desc`, `address`, `phone`, `email`, `user_name`, `password`) VALUES
-(0, 'NPAAS Engineers1', 'Numerical Protection and Automation Application Support Engineers1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit1', '', '', 'Magnam dolores commodi suscipit. N1ecessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit.1', 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,1', 2321, 4321, 229, 'Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui1', 'Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui1', 'A108 Adam Street, New York, NY 5350221', '+1 5589 55488 551', 'contact@example.com1', 'xyz', '5f4dcc3b5aa765d61d8327deb882cf99');
+(0, 'NPAAS Engineers', 'Numerical Protection and Automation Application Support Engineers', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit', '', '', 'Magnam dolores commodi suscipit. N1ecessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit.', 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,', 232, 432, 229, 'Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui', 'Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui', 'B-503, Pruthvi Enclave 2, Opp. Bhor Industries, Borivali (E), Mum-400066', '+91 99675805444', 'pravintalekar@npaasengineers.com', 'admin', '5f4dcc3b5aa765d61d8327deb882cf99');
 
 -- --------------------------------------------------------
 
@@ -99,9 +98,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `product_name`, `product_service`, `product_description`, `product_list`, `product_image`, `product_filter`) VALUES
-(1, 'Test11', 'Test1_service', 'Test1_desc', 'a123|b1234', 'products/good_old_days.png', 'a'),
-(2, 'Test2', 'Test22_ser', 'Test22_sadghsadghsjagd', 'aasd123|bds1234|nbn12', 'products/20211016_152653.jpg', 'a'),
-(11, 'sadsad', 'sadsadsa', 'dsadsad', 'sadsadsadsad', 'products/minato.jpg', 'asdsadds');
+(1, 'Sample Product 1', 'Sample Service Desc', 'Sample Product Desc', 'prod_1|prod_2', 'products/default.jpg', 'one'),
+(2, 'Sample Product 2', 'Sample Service Desc 2', 'Sample Product Desc 2', 'prod_11|prod_12|prod_13', 'products/default.jpg', 'two');
 
 -- --------------------------------------------------------
 
@@ -120,8 +118,7 @@ CREATE TABLE `services` (
 --
 
 INSERT INTO `services` (`service_id`, `service_name`, `service_desc`) VALUES
-(1, 'ddd', 'dddddddd'),
-(2, 'Service A1', 'Description A'),
+(2, 'Service A', 'Description A'),
 (3, 'Service B', 'Description B'),
 (4, 'Service C', 'Description C'),
 (5, 'Service D', 'Description D');
@@ -147,9 +144,7 @@ CREATE TABLE `team` (
 --
 
 INSERT INTO `team` (`team_id`, `team_name`, `team_designation`, `team_phone`, `team_email`, `team_linkedin`, `team_image`) VALUES
-(1, 'Pravin Talekar', 'Director', '987654321', 'example@example.com', 'linkedin.com', 'team/good_old_days.png'),
-(2, 'xyz', 'sasss', '3456789876', 'dfds@dsd.com', 'ssasas', 'team/Dazai-Osamu-At-The-Detective-Agency-Bungo-Stray-Dogs.png'),
-(3, 'tttdddd', 'ttt', '444', 'fdf@dsd.com', 'dsdsd', 'team/20211016_152712.jpg');
+(1, 'Pravin Talekar', 'Director', '919967580544', 'pravintalekar@npaasengineers.com', 'linkedin.com', 'team/default.jpg');
 
 --
 -- Indexes for dumped tables
