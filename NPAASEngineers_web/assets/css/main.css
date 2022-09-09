@@ -1,0 +1,93 @@
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #206488;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #fff;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #D4D4D4;
+}
+
+.admin-button {
+  width: 100%;
+  background: #67b0d1;
+  border: 0;
+  padding: 10px 24px;
+  color: #fff;
+  transition: 0.4s;
+}
+
+.admin-button:hover {
+  background: #8ec4dd;
+}
+
+.cert-btn {
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 8px 28px;
+  border-radius: 25px;
+  transition: 0.5s;
+  border: 2px solid #206488;
+  color: #206488;
+}
+
+.cert-btn:hover {
+  background: #206488;
+  color: #fff;
+}
+
+.del-button {
+  width: 100%;
+  background: #DA321B;
+  border: 0;
+  padding: 10px 24px;
+  color: #fff;
+  transition: 0.4s;
+}
+
+.del-button:hover {
+  background: #8A160A;
+}
+
+.collapse-btn {
+  width: 100%;
+  background: #8E989D;
+  border: 0;
+  padding: 10px 24px;
+  color: #fff;
+  transition: 0.4s;
+}
+
+.collapse-btn:hover {
+  background: #69757A;
+}
+
+.add-button {
+  width: 100%;
+  border: 2px solid #67b0d1;
+  padding: 10px 24px;
+  color: #67b0d1;
+  transition: 0.5s;
+}
+
+.add-button:hover {
+  background: #67b0d1;
+  color: #fff;
+}
+
+
+
