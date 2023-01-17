@@ -91,7 +91,7 @@ $info = mysqli_fetch_assoc($result_info);
               $result_products = mysqli_query($db, $products_query);
               while($row = mysqli_fetch_assoc($result_products)){
                 ?>
-              <li><a href="product.php?name=<?= $row['product_name'] ?>" target="_blank"><?= $row['product_name'] ?></a></li>
+              <li><a href="product.php?id=<?= $row['product_id'] ?>" target="_blank"><?= $row['product_name'] ?></a></li>
               <?php
               }
                 ?>
@@ -284,7 +284,7 @@ $info = mysqli_fetch_assoc($result_info);
               <div class="portfolio-wrap">
                 <img src="assets/img/<?=$row['product_image']?>" class="img-fluid" alt="">
                 <div class="portfolio-links">
-                  <a href="product.php?name=<?=$row['product_name']?>" title="More Details" class="text-uppercase view-prod"><i class="bx bx-link"></i> View Products</a>
+                  <a href="product.php?id=<?=$row['product_id']?>" title="More Details" class="text-uppercase view-prod"><i class="bx bx-link"></i> View Products</a>
                 </div>
               </div>
               <div class="d-flex justify-content-center text-dark font-weight-bold text-uppercase">

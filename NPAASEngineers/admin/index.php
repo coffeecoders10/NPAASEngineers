@@ -9,9 +9,11 @@ if($_SESSION["Login"] != 1){
 $info_query = "SELECT * FROM info";
 $result_info = mysqli_query($db, $info_query);
 $info = mysqli_fetch_assoc($result_info);
+
 $products_query = "SELECT * FROM products";
 $result_products = mysqli_query($db, $products_query);
 $products = mysqli_fetch_all($result_products);
+
 $team_query = "SELECT * FROM team";
 $result_team = mysqli_query($db, $team_query);
 $team = mysqli_fetch_all($result_team);
@@ -54,7 +56,6 @@ $services = mysqli_fetch_all($result_services);
     $name = $_POST["name"];
     $service = $_POST["service"];
     $description = $_POST["description"];
-    $product_list = $_POST["product_list"];
     $image = $_FILES["image"];
     $image_name = $_POST["image_name"];
     $filter = $_POST["filter"];
@@ -69,14 +70,31 @@ $services = mysqli_fetch_all($result_services);
       else{
         $img_path = $image_name[$x];
       }
-      $update_sql = "UPDATE `products` SET `product_name`='$name[$x]',`product_service`='$service[$x]',`product_description`='$description[$x]',`product_list`='$product_list[$x]',`product_image`='$img_path',`product_filter`='$filter[$x]' WHERE `product_id`='$id[$x]'";
+      $update_sql = "UPDATE `products` SET `product_name`='$name[$x]',`product_service`='$service[$x]',`product_description`='$description[$x]',`product_image`='$img_path',`product_filter`='$filter[$x]' WHERE `product_id`='$id[$x]'";
       $result_update = mysqli_query($db, $update_sql);
+
+      $product_list_id = $_POST["product_list_id_".$id[$x]];
+      $product_list_product_id = $_POST["product_list_product_id_".$id[$x]];
+      $product_list_name = $_POST["product_list_name_".$id[$x]];
+      $product_list_link = $_POST["product_list_link_".$id[$x]];
+      $product_list_n = count($product_list_id);
+      for($y = 0; $y < $product_list_n; $y++){
+        $update_sql = "UPDATE `product_list` SET `product_list_name`='$product_list_name[$y]',`product_list_link`='$product_list_link[$y]' WHERE `product_list_id`='$product_list_id[$y]'";
+        $result_update = mysqli_query($db, $update_sql);
+      }
+
+      $product_list_names = $_POST["product_list_names_".$id[$x]];
+      $product_list_links = $_POST["product_list_links_".$id[$x]];
+      $product_list_ns = count($product_list_names);
+      for($y = 0; $y < $product_list_ns - 1; $y++){
+        $insert_sql = "INSERT INTO `product_list`(`product_list_product_id`, `product_list_name`, `product_list_link`) VALUES ($id[$x],'$product_list_names[$y]','$product_list_links[$y]')";
+        $result_update = mysqli_query($db, $insert_sql);
+      }
     }
 
     $names = $_POST["names"];
     $services = $_POST["services"];
     $descriptions = $_POST["descriptions"];
-    $product_lists = $_POST["product_lists"];
     $images = $_FILES["images"];
     $filters = $_POST["filters"];
     $l = count($names);
@@ -88,14 +106,21 @@ $services = mysqli_fetch_all($result_services);
       else{
         $img_path = "products/default.jpg";
       }
-      $insert_sql = "INSERT INTO `products`(`product_name`, `product_service`, `product_description`, `product_list`, `product_image`, `product_filter`) VALUES ('$names[$x]','$services[$x]','$descriptions[$x]','$product_lists[$x]','$img_path','$filters[$x]')";
+      $insert_sql = "INSERT INTO `products`(`product_name`, `product_service`, `product_description`, `product_image`, `product_filter`) VALUES ('$names[$x]','$services[$x]','$descriptions[$x]','$img_path','$filters[$x]')";
       $result_insert = mysqli_query($db, $insert_sql);
+
     }
     header("Location: index.php");
   }
   else if(isset($_POST["product_delete"])){
     $id = $_POST["product_delete"];
     $delete_sql = "DELETE FROM `products` WHERE `product_id`='$id'";
+    $result_delete = mysqli_query($db, $delete_sql);
+    header("Location: index.php");
+  }
+  else if(isset($_POST["product_list_delete"])){
+    $id = $_POST["product_list_delete"];
+    $delete_sql = "DELETE FROM `product_list` WHERE `product_list_id`='$id'";
     $result_delete = mysqli_query($db, $delete_sql);
     header("Location: index.php");
   }
@@ -293,6 +318,7 @@ var ct = 1;
 var ct_1 = 1;
 var ct_2 = 1;
 var ct_3 = 1;
+var ct_4 = 1;
 function new_link()
 {
 	ct++;
@@ -370,6 +396,29 @@ function delIt_3(eleId)
 	d = document;
 	var ele = d.getElementById(eleId);
 	var parentEle = d.getElementById('newlink_3');
+	parentEle.removeChild(ele);
+}
+
+function new_link_4(Id)
+{
+	ct_4++;
+	var div1 = document.createElement('div');
+	div1.id = ct_4 + "_" + Id.toString();
+  console.log(div1);
+	// link to delete extended form elements
+  var delLink = '<div class="col-md-12 text-right mt-3 mb-5"><a href="javascript:delIt_4('+ ct_4 +', ' + Id + ')" class="del-button mb-5" >Delete</button></div>';
+	// var delLink = '<div style="text-align:right;margin-right:65px"><a href="javascript:delIt_2('+ ct_1 +')">Del</a></div>';
+	div1.innerHTML = document.getElementById('newlinktpl_4_' + Id).innerHTML + delLink;
+	document.getElementById('newlink_4_' + Id).appendChild(div1);
+}
+// function to delete the newly added set of elements
+function delIt_4(eleId, Id)
+{
+	d = document;
+	var parentEle = d.getElementById('newlink_4_' + Id);
+  // var ele = d.getElementById(eleId);
+  var ele = d.getElementById(eleId + "_" + Id);
+  console.log(ele);
 	parentEle.removeChild(ele);
 }
 </script>
@@ -568,7 +617,6 @@ function delIt_3(eleId)
 
                   <?php
                   foreach ($products as $key) {
-
                   ?>
 
                   <hr class="mb-3">
@@ -598,36 +646,90 @@ function delIt_3(eleId)
                       <div class="col-md-12 form-group">
                         <input type="text" class="form-control" value="<?= $key["3"] ?>" name="description[]" id="subject" required/>
                       </div>
-                      <div class="col-md-12 ml-2">
-                        <p class="text-uppercase font-weight-bold">Product List</p>
+                      <div id = "newlink_4_<?= $key["0"] ?>">
+                      <?php
+                        $product_list_query = "SELECT * FROM product_list WHERE product_list_product_id = ".$key["0"];
+                        // echo $product_list_query;
+                        $result_product_list = mysqli_query($db, $product_list_query);
+                        $product_list = mysqli_fetch_all($result_product_list);
+                        foreach ($product_list as $i) {
+                      ?>
+                      <div class="col-md-12">
+                        <div class="col-md-12 form-group" style="display:none">
+                          <input type="text" name="product_list_id_<?= $key["0"] ?>[]" value="<?= $i["0"] ?>" class="form-control" id="plid" required/>
+                        </div>
+                        <div class="col-md-12 form-group" style="display:none">
+                          <input type="text" name="product_list_product_id_<?= $key["0"] ?>[]" value="<?= $i["1"] ?>" class="form-control" id="pid" required/>
+                        </div>
+                        <div class="col-md-12 ml-2">
+                          <p class="text-uppercase font-weight-bold">Product List Name</p>
+                        </div>
+                        <div class="col-md-12 form-group">
+                          <input type="text" class="form-control" value="<?= $i["2"] ?>" name="product_list_name_<?= $key["0"] ?>[]" id="name_list" required/>
+                        </div>
+                        <div class="col-md-12 ml-2">
+                          <p class="text-uppercase font-weight-bold">Product List Link</p>
+                        </div>
+                        <div class="col-md-12 form-group">
+                          <input type="text" class="form-control" value="<?= $i["3"] ?>" name="product_list_link_<?= $key["0"] ?>[]" id="link" required/>
+                        </div>
+                        <div class="text-center">
+                          <button type="submit" class="del-button mb-5" name="product_list_delete" value="<?= $i[0] ?>">Delete</button>
+                        </div>
                       </div>
-                      <div class="col-md-12 form-group">
-                        <textarea class="form-control" name="product_list[]" rows="5" data-rule="required" required><?= $key["4"] ?></textarea>
+
+                    <?php } ?>
+                  </div>
+                    <p id = "addnew_4">
+                      <div class="col-md-12 d-flex justify-content-center">
+                        <a href="javascript:new_link_4(<?= $key["0"] ?>)" class = "add-button text-uppercase font-weight-bold" style="width:100%">Add New Product List</a>
                       </div>
+                    </p>
                       <div class="col-md-12 ml-2">
                         <p class="text-uppercase font-weight-bold">Product Image</p>
                       </div>
                       <div class="col-md-12 ml-2">
-                        <img src="../assets/img/<?= $key["5"] ?>" style="height:170px; width:auto; max-width:500px;">
+                        <img src="../assets/img/<?= $key["4"] ?>" style="height:170px; width:auto; max-width:500px;">
                       </div>
                       <center>
                       <div class="col-md-10 form-group border border-dark p-2" style="display:none">
-                        <input type="text" id="img" name="image_name[]" value="<?= $key["5"] ?>">
+                        <input type="text" id="img" name="image_name[]" value="<?= $key["4"] ?>">
                       </div>
                       <div class="col-md-10 form-group border border-dark p-2">
-                        <input type="file" id="img" name="image[]" value="<?= $key["5"] ?>" accept="image/*">
+                        <input type="file" id="img" name="image[]" value="<?= $key["4"] ?>" accept="image/*">
                       </div>
                       </center>
                       <div class="col-md-12 ml-2">
                         <p class="text-uppercase font-weight-bold">Category</p>
                       </div>
                       <div class="col-md-12 form-group">
-                        <input type="text" class="form-control" value="<?= $key["6"] ?>" name="filter[]" id="filter" required/>
+                        <input type="text" class="form-control" value="<?= $key["5"] ?>" name="filter[]" id="filter" required/>
                       </div>
                       <div class="text-center">
                         <button type="submit" class="del-button mb-5" name="product_delete" value="<?= $key[0] ?>">Delete</button>
                       </div>
                     </div>
+                  </div>
+                  <div id = "newlinktpl_4_<?=$key["0"] ?>" style="display:none">
+                    <div class="form-row">
+                      <hr>
+                      <div class="col-md-12 ml-2 d-flex justify-content-center">
+                        <h4 class="text-uppercase font-weight-bold">New Product List</h4>
+                      </div>
+                      <div class="col-md-12 ml-2">
+                        <p class="text-uppercase font-weight-bold">Product List Name</p>
+                      </div>
+                      <div class="col-md-12 form-group">
+                        <input type="text" class="form-control" name="product_list_names_<?=$key["0"] ?>[]" id="subject"/>
+                      </div>
+                      <div class="col-md-12 ml-2">
+                        <p class="text-uppercase font-weight-bold">Product List Link</p>
+                      </div>
+                      <div class="col-md-12 form-group">
+                        <input type="text" class="form-control" name="product_list_links_<?=$key["0"] ?>[]" id="subject"/>
+                      </div>
+                    </div>
+
                   </div>
 
               <?php
@@ -672,12 +774,6 @@ function delIt_3(eleId)
                         <input type="text" class="form-control" name="descriptions[]" required/>
                       </div>
                       <div class="col-md-12 ml-2">
-                        <p class="text-uppercase font-weight-bold">Product List</p>
-                      </div>
-                      <div class="col-md-12 form-group">
-                        <textarea class="form-control" name="product_lists[]" rows="5" data-rule="required" required></textarea>
-                      </div>
-                      <div class="col-md-12 ml-2">
                         <p class="text-uppercase font-weight-bold">Product Image</p>
                       </div>
                       <center>
@@ -694,6 +790,7 @@ function delIt_3(eleId)
                     </div>
                   </div>
           </div>
+
           </div>
 
         </div>

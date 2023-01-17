@@ -2,10 +2,14 @@
 
 require($_SERVER['DOCUMENT_ROOT']."/NPAASEngineers/dbconnect.php");
 
-$name = $_GET["name"];
-$prod_query = "SELECT * FROM products WHERE product_name='".$name."'";
+$id = $_GET["id"];
+$prod_query = "SELECT * FROM product_list WHERE product_list_product_id= $id";
 $result_prod = mysqli_query($db, $prod_query);
-$prod = mysqli_fetch_assoc($result_prod);
+$prod = mysqli_fetch_all($result_prod);
+
+$products_query = "SELECT * FROM products WHERE product_id= $id";
+$result_products = mysqli_query($db, $products_query);
+$products = mysqli_fetch_assoc($result_products);
 
 $info_query = "SELECT * FROM info";
 $result_info = mysqli_query($db, $info_query);
@@ -81,8 +85,8 @@ $info = mysqli_fetch_assoc($result_info);
   <!-- ======= Hero Section ======= -->
   <section id="hero">
     <div class="hero-container" data-aos="fade-up">
-      <img class="mb-5" src="assets/img/<?= $prod['product_image'] ?>" style="height:40vh">
-      <h1><?= $prod['product_name'] ?></h1>
+      <img class="mb-5" src="assets/img/<?= $products['product_image'] ?>" style="height:40vh">
+      <h1><?= $products['product_name'] ?></h1>
       <!-- <h2></h2> -->
       <a href="#products" class="btn-get-started scrollto"><i class="bx bx-chevrons-down"></i></a>
     </div>
@@ -100,14 +104,14 @@ $info = mysqli_fetch_assoc($result_info);
 
         <div class="row d-flex justify-content-center">
         <?php
-          $prod_array = explode("|",$prod['product_list']);
-          for ($i = 0; $i < count($prod_array); $i++) {
+          // $prod_array = explode("|",$prod['product_list']);
+          foreach ($prod as $key) {
             ?>
 
             <div class="col-md-6 col-lg-3 d-flex align-items-center mb-3">
               <div class="icon-box d-flex justify-content-start align-items-center" data-aos="fade-up" style="width:100%;padding-bottom:10px">
                 <div class="icon pr-3"><i class='bx bxs-box'></i></div>
-                <h4 class="title"><a href=""><?= $prod_array[$i] ?></a></h4>
+                <h4 class="title"><a href="<?= $key["3"] ?>" target="_blank"><?= $key["2"] ?></a></h4>
                 <p class="description"></p>
               </div>
             </div>
@@ -147,9 +151,9 @@ $info = mysqli_fetch_assoc($result_info);
         <div class="row no-gutters">
           <div class="content col-xl-12 d-flex align-items-stretch" data-aos="fade-up">
             <div class="content">
-              <h3>About <?= $prod['product_name'] ?></h3>
+              <h3>About <?= $products['product_name'] ?></h3>
               <p>
-                <?= $prod['product_description'] ?>
+                <?= $products['product_description'] ?>
               </p>
             </div>
           </div>
@@ -167,7 +171,7 @@ $info = mysqli_fetch_assoc($result_info);
 
         <div class="section-title" data-aos="fade-in" data-aos-delay="100">
           <h2>Contact</h2>
-          <p> For more Queries about <b><?= $prod['product_name'] ?></b></p>
+          <p> For more Queries about <b><?= $products['product_name'] ?></b></p>
         </div>
 
         <div class="row" data-aos="fade-up" data-aos-delay="100">
