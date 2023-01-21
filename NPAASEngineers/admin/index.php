@@ -647,6 +647,7 @@ function delIt_4(eleId, Id)
                         <input type="text" class="form-control" value="<?= $key["3"] ?>" name="description[]" id="subject" required/>
                       </div>
                       <div id = "newlink_4_<?= $key["0"] ?>">
+                        <div class="row">
                       <?php
                         $product_list_query = "SELECT * FROM product_list WHERE product_list_product_id = ".$key["0"];
                         // echo $product_list_query;
@@ -654,31 +655,33 @@ function delIt_4(eleId, Id)
                         $product_list = mysqli_fetch_all($result_product_list);
                         foreach ($product_list as $i) {
                       ?>
-                      <div class="col-md-12">
+                      <div class="col-md-6">
                         <div class="col-md-12 form-group" style="display:none">
                           <input type="text" name="product_list_id_<?= $key["0"] ?>[]" value="<?= $i["0"] ?>" class="form-control" id="plid" required/>
                         </div>
                         <div class="col-md-12 form-group" style="display:none">
                           <input type="text" name="product_list_product_id_<?= $key["0"] ?>[]" value="<?= $i["1"] ?>" class="form-control" id="pid" required/>
                         </div>
-                        <div class="col-md-12 ml-2">
-                          <p class="text-uppercase font-weight-bold">Product List Name</p>
-                        </div>
-                        <div class="col-md-12 form-group">
-                          <input type="text" class="form-control" value="<?= $i["2"] ?>" name="product_list_name_<?= $key["0"] ?>[]" id="name_list" required/>
-                        </div>
-                        <div class="col-md-12 ml-2">
-                          <p class="text-uppercase font-weight-bold">Product List Link</p>
-                        </div>
-                        <div class="col-md-12 form-group">
-                          <input type="text" class="form-control" value="<?= $i["3"] ?>" name="product_list_link_<?= $key["0"] ?>[]" id="link" required/>
-                        </div>
-                        <div class="text-center">
-                          <button type="submit" class="del-button mb-5" name="product_list_delete" value="<?= $i[0] ?>">Delete</button>
+                        <div class="row">
+                          <div class="col-md-4">
+                            <p class="text-uppercase font-weight-bold">Product Name</p>
+                          </div>
+                          <div class="col-md-8 form-group">
+                            <input type="text" class="form-control" value="<?= $i["2"] ?>" name="product_list_name_<?= $key["0"] ?>[]" id="name_list" required/>
+                          </div>
+                          <div class="col-md-4">
+                            <p class="text-uppercase font-weight-bold">Product Link</p>
+                          </div>
+                          <div class="col-md-8 form-group">
+                            <input type="text" class="form-control" value="<?= $i["3"] ?>" name="product_list_link_<?= $key["0"] ?>[]" id="link" required/>
+                          </div>
+                          <div class="col-md-12 text-right">
+                            <button type="submit" class="del-button mb-3 col-4 text-center" name="product_list_delete" value="<?= $i[0] ?>">Delete</button>
+                          </div>
                         </div>
                       </div>
-
                     <?php } ?>
+                  </div>
                   </div>
                     <p id = "addnew_4">
                       <div class="col-md-12 d-flex justify-content-center">
@@ -711,23 +714,25 @@ function delIt_4(eleId, Id)
                     </div>
                   </div>
                   <div id = "newlinktpl_4_<?=$key["0"] ?>" style="display:none">
-                    <div class="form-row">
+                    <div class="col-md-12">
                       <hr>
                       <div class="col-md-12 ml-2 d-flex justify-content-center">
                         <h4 class="text-uppercase font-weight-bold">New Product List</h4>
                       </div>
-                      <div class="col-md-12 ml-2">
-                        <p class="text-uppercase font-weight-bold">Product List Name</p>
-                      </div>
-                      <div class="col-md-12 form-group">
-                        <input type="text" class="form-control" name="product_list_names_<?=$key["0"] ?>[]" id="subject"/>
-                      </div>
-                      <div class="col-md-12 ml-2">
-                        <p class="text-uppercase font-weight-bold">Product List Link</p>
-                      </div>
-                      <div class="col-md-12 form-group">
-                        <input type="text" class="form-control" name="product_list_links_<?=$key["0"] ?>[]" id="subject"/>
-                      </div>
+                      <div class="row ml-2">
+                        <div class="col-md-4">
+                          <p class="text-uppercase font-weight-bold">Product List Name</p>
+                        </div>
+                        <div class="col-md-8 form-group">
+                          <input type="text" class="form-control" name="product_list_names_<?= $key["0"] ?>[]" id="subject"/>
+                        </div>
+                        <div class="col-md-4">
+                          <p class="text-uppercase font-weight-bold">Product List Link</p>
+                        </div>
+                        <div class="col-md-8 form-group">
+                          <input type="text" class="form-control" name="product_list_links_<?= $key["0"] ?>[]" id="subject"/>
+                        </div>
+                    </div>
                     </div>
 
                   </div>
