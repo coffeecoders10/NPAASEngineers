@@ -59,6 +59,7 @@ $services = mysqli_fetch_all($result_services);
     $image = $_FILES["image"];
     $image_name = $_POST["image_name"];
     $filter = $_POST["filter"];
+    $doc_link = $_POST["doc_link"];
     $n = count($id);
     for ($x = 0; $x < $n; $x++) {
       if($image['name'][$x] != ""){
@@ -70,7 +71,7 @@ $services = mysqli_fetch_all($result_services);
       else{
         $img_path = $image_name[$x];
       }
-      $update_sql = "UPDATE `products` SET `product_name`='$name[$x]',`product_service`='$service[$x]',`product_description`='$description[$x]',`product_image`='$img_path',`product_filter`='$filter[$x]' WHERE `product_id`='$id[$x]'";
+      $update_sql = "UPDATE `products` SET `product_name`='$name[$x]',`product_service`='$service[$x]',`product_description`='$description[$x]',`product_image`='$img_path',`product_filter`='$filter[$x]', `product_doc`='$doc_link[$x]' WHERE `product_id`='$id[$x]'";
       $result_update = mysqli_query($db, $update_sql);
 
       $product_list_id = $_POST["product_list_id_".$id[$x]];
@@ -97,6 +98,7 @@ $services = mysqli_fetch_all($result_services);
     $descriptions = $_POST["descriptions"];
     $images = $_FILES["images"];
     $filters = $_POST["filters"];
+    $doc_links = $_POST["doc_links"];
     $l = count($names);
     for ($x = 0; $x < $l; $x++) {
       if($images['name'][$x] != ""){
@@ -106,7 +108,7 @@ $services = mysqli_fetch_all($result_services);
       else{
         $img_path = "products/default.jpg";
       }
-      $insert_sql = "INSERT INTO `products`(`product_name`, `product_service`, `product_description`, `product_image`, `product_filter`) VALUES ('$names[$x]','$services[$x]','$descriptions[$x]','$img_path','$filters[$x]')";
+      $insert_sql = "INSERT INTO `products`(`product_name`, `product_service`, `product_description`, `product_image`, `product_filter`, `product_doc`) VALUES ('$names[$x]','$services[$x]','$descriptions[$x]','$img_path','$filters[$x]','$doc_links[$x]')";
       $result_insert = mysqli_query($db, $insert_sql);
 
     }
@@ -646,6 +648,12 @@ function delIt_4(eleId, Id)
                       <div class="col-md-12 form-group">
                         <input type="text" class="form-control" value="<?= $key["3"] ?>" name="description[]" id="subject" required/>
                       </div>
+                      <div class="col-md-12 ml-2">
+                        <p class="text-uppercase font-weight-bold">Document Link</p>
+                      </div>
+                      <div class="col-md-10 form-group">
+                        <input type="url" name="doc_link[]" value="<?= $key["6"] ?>" class="form-control" id="doc_link"/>
+                      </div>
                       <div id = "newlink_4_<?= $key["0"] ?>">
                         <div class="row">
                       <?php
@@ -777,6 +785,12 @@ function delIt_4(eleId, Id)
                       </div>
                       <div class="col-md-12 form-group">
                         <input type="text" class="form-control" name="descriptions[]" required/>
+                      </div>
+                      <div class="col-md-12 ml-2">
+                        <p class="text-uppercase font-weight-bold">Documnet Link</p>
+                      </div>
+                      <div class="col-md-12 form-group">
+                        <input type="text" name="doc_links[]" class="form-control" required/>
                       </div>
                       <div class="col-md-12 ml-2">
                         <p class="text-uppercase font-weight-bold">Product Image</p>
