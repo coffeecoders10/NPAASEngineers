@@ -155,7 +155,6 @@ $info = mysqli_fetch_assoc($result_info);
               <p>
                 <?= $products['product_description'] ?>
               </p>
-              <a href="<?= $products['product_doc'] ?>" target="_blank">Read Documentation</a>
             </div>
           </div>
         </div>
